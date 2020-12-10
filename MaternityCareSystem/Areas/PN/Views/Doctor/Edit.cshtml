@@ -1,0 +1,60 @@
+﻿@model MaternityCareSystem.Areas.PN.DataModels.DoctorInfo
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.DoctorId)
+    <div class="ibox">
+        <div class="ibox-title"><h5>Edit Doctor</h5></div>
+        <div class="ibox-content">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-row">
+                        <label class="col-form-label col-md-6">Doctor Name</label>
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.DoctorName, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                            @Html.ValidationMessageFor(model => model.DoctorName, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-6">Phone</label>
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control form-control-sm", data_mask = "9999-9999999" } })
+                            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-6">Is Available</label>
+                        <div class="checkbox col-md-6">
+                            @Html.CheckBoxFor(model => model.IsAvailable, htmlAttributes: new { @class = " " })
+                            @Html.ValidationMessageFor(model => model.IsAvailable, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-6">Specialization</label>
+                        <div class="col-md-6">
+                            @Html.DropDownListFor(model => model.SpecializationId, null, htmlAttributes: new { @class = "form-control form-control-sm" })
+                            @Html.ValidationMessageFor(model => model.SpecializationId, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-6">Address</label>
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="offset-10 col-md-2">
+                    <input type="submit" value="Update" class="btn btn-primary" />
+                    <a class="btn btn-danger" href="@Url.Action("Index")">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section Scripts {
+    <script src="~/Scripts/js/plugins/jasny/jasny-bootstrap.min.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+}

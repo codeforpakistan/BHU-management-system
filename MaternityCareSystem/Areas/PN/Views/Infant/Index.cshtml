@@ -1,0 +1,495 @@
+﻿@model IEnumerable<MaternityCareSystem.Areas.PN.DataModels.PostNatal_Infant>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class="ibox-content">
+        <div class="ibox-title"><h5>Post-Natal Infant Checkup</h5></div>
+        <div class="row">
+            <div class="col-md-4">
+                <a class="btn btn-w-m btn-primary" href="@Url.Action("Create")"><i class="fa fa-plus"></i> Add New</a>
+            </div>
+            <div class="col-md-4 offset-4 float-right">
+                <div class="input-group">
+                    <input type="text" id="txt-input-id" placeholder="Search..." class="form-control">
+                    <span class="input-group-append">
+                        <button type="button" class="btn btn-primary">
+                            <i class="fa fa-search"></i> Search
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <table class="table table-bordered table-responsive mt-1">
+            <thead>
+                <tr>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.PatientName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.InfantDOB)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.InfantAge)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DeliveryCondition)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DeliveryTerm)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DeliveryHospital)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DeliveryMaternityHome)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DeliveryHome)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Alert)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Listless)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Jaundice)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Active)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Agitated)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Pale)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Smiling)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Convulsions)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Crying)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NonResponse)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Lethargic)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ColorPink)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Other)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.InfantCondition)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BreastFeeding)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FeedingCondition)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Temperature)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Weight)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.WeightPercentile)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BirthWieght)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BirthWieghtPercentile)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Length)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LengthPercentile)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.HC)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.HCPercentile)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Head)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AntFontAnelle)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PostFontAnelle)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Sutures)
+                    </th>
+                 
+                    <th>
+                        @Html.DisplayNameFor(model => model.EyePupils)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EyeSclera)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EyeConjuctiva)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EyeDischargeLeft)
+                    </th>
+                 
+                    <th>
+                        @Html.DisplayNameFor(model => model.TMLeftNormal)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TMLeftWhite)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TMLeftRed)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TMLeftRellow)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TMLeftBulging)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TMLeftMobile)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TMLeftNonMobile)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TMLeftRaptured)
+                    </th>
+                 
+                    <th>
+                        @Html.DisplayNameFor(model => model.TMRightNormal)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TMRightWhite)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TMRightRed)
+                    </th>
+                  
+                    <th>
+                        @Html.DisplayNameFor(model => model.TMRightBulging)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TMRightMobile)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TMRightNonMobile)
+                    </th>
+               
+                    <th>
+                        @Html.DisplayNameFor(model => model.Neck)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SwollenLymphNode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NeckLeft)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NeckRight)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Suck)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Mouth)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Throat)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nose)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NoseDischarge)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EarPennaeLeft)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EarPennaeRight)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EarPennaeNotes)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EarCanalLeft)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EarCanalRight)
+                    </th>
+                   
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PatientName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.InfantDOB)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.InfantAge)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DeliveryCondition)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DeliveryTerm)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DeliveryHospital)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DeliveryMaternityHome)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DeliveryHome)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Alert)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Listless)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Jaundice)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Active)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Agitated)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Pale)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Smiling)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Convulsions)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Crying)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NonResponse)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Lethargic)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ColorPink)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Other)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.InfantCondition)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BreastFeeding)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FeedingCondition)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Temperature)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Weight)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.WeightPercentile)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BirthWieght)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BirthWieghtPercentile)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Length)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LengthPercentile)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HC)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HCPercentile)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Head)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AntFontAnelle)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PostFontAnelle)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Sutures)
+                        </td>
+                       
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EyePupils)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EyeSclera)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EyeConjuctiva)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EyeDischargeLeft)
+                        </td>
+                       
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TMLeftNormal)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TMLeftWhite)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TMLeftRed)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TMLeftRellow)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TMLeftBulging)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TMLeftMobile)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TMLeftNonMobile)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TMLeftRaptured)
+                        </td>
+                      
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TMRightNormal)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TMRightWhite)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TMRightRed)
+                        </td>
+                    
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TMRightBulging)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TMRightMobile)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TMRightNonMobile)
+                        </td>
+                     
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Neck)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SwollenLymphNode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NeckLeft)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NeckRight)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Suck)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Mouth)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Throat)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nose)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NoseDischarge)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EarPennaeLeft)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EarPennaeRight)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EarPennaeNotes)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EarCanalLeft)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EarCanalRight)
+                        </td>
+                     
+                        <td>
+                            <a class="btn btn-primary btn-sm" href="@Url.Action("Edit", new { id = item.PostNatalInfantId })">Edit</a>
+                            <a class="btn btn-danger btn-sm text-white" data-examid="@item.PostNatalInfantId" onclick="deleteInfant(this)">Remove</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section scripts{
+    <script>
+        function deleteInfant(objRef) {
+            var id = $(objRef).data('examid');
+            var tr = $(objRef).parent('td').parent('tr');
+            ngo.HTML.Confirm.Show({ message: "Do you want to delete", title: "warning", type: "warning" }, function () {
+                $.ajax({
+                    url: "/PN/Infant/Delete",
+                    contentType: "application/json",
+                    dataType: "Json",
+                    data: "{id:'" + id + "'}",
+                    type: "Post",
+                    success: function (data) {
+                        if (!data.result.Error) {
+                            ngo.HTML.Alert.Show({ message: "Record deleted successfully", title: "success", type: "success" });
+                            $(tr).fadeOut(500);
+                        }
+                    }
+                });
+            });
+        }
+    </script>
+}

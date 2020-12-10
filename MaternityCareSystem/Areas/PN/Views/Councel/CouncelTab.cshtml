@@ -1,0 +1,184 @@
+﻿@model MaternityCareSystem.Areas.PN.DataModels.PreNatal_Counsel
+@{
+    ViewBag.Title = "CouncelTab";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<link href="~/Content/css/plugins/steps/jquery.steps.css" rel="stylesheet" />
+<script src="~/Scripts/js/plugins/steps/jquery.steps.min.js"></script>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Counsel</h5>
+                <div class="ibox-tools">
+                   
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="row" hidden>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            @Html.TextBox("MotherName", null, htmlAttributes: new { @class = "form-control", @placeholder = "Mother Name" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+
+                        @using (Html.BeginForm("PopulateForm", "StepTwo", new { area = "PN" }, FormMethod.Get))
+                        {
+                            <div class="form-group">
+                                <input type="text" id="MrNumber" name="MrNumber" placeholder="MrNumber" class="form-control">
+                            </div>
+                        }
+                    </div>
+
+                </div>
+
+
+                @using (Html.BeginForm("CouncelTab", "Councel", new { Area = "PN" }, FormMethod.Post, htmlAttributes: new { @class = "wizard-big wizard clearfix" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="steps clearfix">
+                        <ul role="tablist">
+                            <li role="tab" class="first disabled" aria-disabled="true" aria-selected="false">
+                                <a id="form-t-0" href="#form-h-0" aria-controls="form-p-0">
+                                    <span class="current-info audible">current step: </span>
+                                    <span class="number">1.</span>
+                                    Counsel
+                                </a>
+                            </li>
+                            <li role="tab" class="disabled" aria-disabled="false" aria-selected="true">
+                                <a id="form-t-1" href="#form-h-1" aria-controls="form-p-1"><span class="number">2.</span>Lab Test</a>
+                            </li>
+                            <li role="tab" class="disabled" aria-disabled="true">
+                                <a id="form-t-2" href="#form-h-2" aria-controls="form-p-2"><span class="number">3.</span> Medication</a>
+                            </li>
+                            <li role="tab" class="current last" aria-disabled="true">
+                                <a id="form-t-3" href="#form-h-3" aria-controls="form-p-3"><span class="number">4.</span> Counsel</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="content clearfix">
+                        <h1 id="form-h-0" tabindex="-1" class="title disabled">Physical Examination</h1>
+                        <fieldset>
+                        </fieldset>
+                        <h1 id="form-h-1" tabindex="-1" class="title disabled">Lab Test</h1>
+                        <fieldset>
+                        </fieldset>
+                        <h1 id="form-h-2" tabindex="-1" class="title current">Medication</h1>
+                        <fieldset>
+                        </fieldset>
+                        <h1 id="form-h-3" tabindex="-1" class="title disabled">Councel</h1>
+                        <fieldset>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <lable class="control-label col-md-2">Patient Name</lable>
+                                        <div class="col-md-10">
+                                            @Html.DropDownListFor(model => model.PatientId, null, htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.PatientId, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <lable class="control-label col-md-2">Visit</lable>
+                                        <div class="col-md-10">
+                                            @Html.DropDownListFor(model => model.VisitNo, null, htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.VisitNo, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <lable class="control-label col-md-2">Checkup-Of</lable>
+                                        <div class="col-md-10">
+                                            @Html.DropDownListFor(model => model.CheckupOf, null, htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.CheckupOf, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <div class="form-check">
+                                                @Html.CheckBoxFor(model => model.DangerSigns, htmlAttributes: new { @class = "form-check-input" })
+                                                <label class="form-check-label" for="DangerSigns"><strong>Danger Signs (Return in or before 1 month</strong></label>
+                                                @Html.ValidationMessageFor(model => model.DangerSigns, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <div class="form-check">
+                                                @Html.CheckBoxFor(model => model.Hgb, htmlAttributes: new { @class = "form-check-input" })
+                                                <label class="form-check-label" for="Hgb"><strong>If Hgb <span><</span> 10(Retun in 2 weeks)</strong></label>
+                                                @Html.ValidationMessageFor(model => model.Hgb, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <div class="form-check">
+                                                @Html.CheckBoxFor(model => model.Protein, htmlAttributes: new { @class = "form-check-input" })
+                                                <label class="form-check-label" for="Protein"><strong>if Protein <text>+</text> in Urine (2 weeks for monitor of BP)- Follow Protocols</strong></label>
+                                                @Html.ValidationMessageFor(model => model.Protein, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+
+                                    <div class="form-group">
+                                        <lable class="control-label col-md-2">Next Visit Date</lable>
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.NextVisitDate, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                                            @Html.ValidationMessageFor(model => model.NextVisitDate, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <lable class="control-label col-md-2">Next Visit Notes</lable>
+                                        <div class="col-md-10">
+                                            @Html.TextAreaFor(model => model.NextVisitNotes, 2, 66, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.NextVisitNotes, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    @*<div class="offset-2 mb-3 mx-auto justify-content-end justify-content-lg-end">
+                <div class="col-md-1 float-lg-right">
+                    <button id="btnsaveLabtest" type="submit" class="btn btn-success btn-block">Next</button>
+                    <a class="btn btn-success btn-block" href="@Url.Action("GetDetails","PhysicalExamination",new {PatientId=Model.PatientId })">Previous</a>
+                </div>
+            </div>*@
+                    <div class="actions clearfix">
+                        <ul role="menu" aria-label="Pagination">
+                            @*<li class="" aria-disabled="false">
+                        <a href="@Url.Action("GetDetails","PhysicalExamination",new {id=Model.PatientId })" role="menuitem">Previous</a>
+                    </li>*@
+                            <li aria-hidden="false" aria-disabled="false"><button id="btn-save-councel" type="submit" class="btn btn-primary btn-block">Next</button></li>
+                            @*<li aria-hidden="true" style="display: none;"><a href="#finish" role="menuitem">Finish</a></li>*@
+                        </ul>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+}
+
+

@@ -1,0 +1,164 @@
+﻿@model MaternityCareSystem.Areas.PN.DataModels.PaedsForm
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="ibox">
+        <div class="ibox-title"><h5>Edit Paeds</h5></div>
+
+        <div class="ibox-content">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.PaedsFormId)
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-row">
+                        <label class="col-form-label col-md-3">Patient Name</label>
+                        <div class="col-md-3">
+                            @Html.DropDownListFor(model => model.PatientId, null, htmlAttributes: new { @class = "form-control form-control-sm select2" })
+                            @Html.ValidationMessageFor(model => model.PatientId, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6"></div>
+                        <label class="col-form-label col-md-3">Chief Complaint</label>
+                        <div class="col-md-9">
+                            @Html.TextAreaFor(model => model.ChiefComplaint, 3, 97, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                            @Html.ValidationMessageFor(model => model.ChiefComplaint, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-3">Illness History</label>
+                        <div class="col-md-9">
+                            @Html.TextAreaFor(model => model.IllnessHistory, 3, 97, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                            @Html.ValidationMessageFor(model => model.IllnessHistory, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-3">Current Medication</label>
+                        <div class="col-md-9">
+                            @Html.TextAreaFor(model => model.CurrentMedication, 3, 97, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                            @Html.ValidationMessageFor(model => model.CurrentMedication, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-row">
+                        <label class="col-form-label col-md-3">BCG</label>
+                        <div class="checkbox col-md-9">
+                            @Html.CheckBoxFor(model => model.BCG, htmlAttributes: new { @class = " " })
+                            @Html.ValidationMessageFor(model => model.BCG, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-12"> <span class="c"><strong>Polio </strong></span></div>
+
+                        <label class="col-form-label col-md-1">#1 Date</label>
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.PolioDate1, new { htmlAttributes = new { @class = "form-control form-control-sm datepicker" } })
+                            @Html.ValidationMessageFor(model => model.PolioDate1, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-1">#2 Date</label>
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.PolioDate2, new { htmlAttributes = new { @class = "form-control form-control-sm datepicker" } })
+                            @Html.ValidationMessageFor(model => model.PolioDate2, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-1">#3 Date</label>
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.PolioDate3, new { htmlAttributes = new { @class = "form-control form-control-sm datepicker" } })
+                            @Html.ValidationMessageFor(model => model.PolioDate3, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-1">#4 Date</label>
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.PolioDate4, new { htmlAttributes = new { @class = "form-control form-control-sm datepicker" } })
+                            @Html.ValidationMessageFor(model => model.PolioDate4, "", new { @class = "text-danger" })
+                        </div>
+
+
+
+                        <div class="col-md-12"> <span class="c"><strong>DPT </strong></span></div>
+                        <label class="col-form-label col-md-1">#1 Date</label>
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.DPTDate1, new { htmlAttributes = new { @class = "form-control form-control-sm datepicker" } })
+                            @Html.ValidationMessageFor(model => model.DPTDate1, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-1">#2 Date</label>
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.DPTDate2, new { htmlAttributes = new { @class = "form-control form-control-sm datepicker" } })
+                            @Html.ValidationMessageFor(model => model.DPTDate2, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-1">#3 Date</label>
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.DPTDate3, new { htmlAttributes = new { @class = "form-control form-control-sm datepicker" } })
+                            @Html.ValidationMessageFor(model => model.DPTDate3, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-1">#4 Date</label>
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.DPTDate4, new { htmlAttributes = new { @class = "form-control form-control-sm datepicker" } })
+                            @Html.ValidationMessageFor(model => model.DPTDate4, "", new { @class = "text-danger" })
+                        </div>
+
+
+                        <div class="col-md-12"> <span class="c"><strong>Hep B </strong></span></div>
+                        <label class="col-form-label col-md-1">#1 Date</label>
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.HepBDate1, new { htmlAttributes = new { @class = "form-control form-control-sm datepicker" } })
+                            @Html.ValidationMessageFor(model => model.HepBDate1, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-1">#2 Date</label>
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.HepBDate2, new { htmlAttributes = new { @class = "form-control form-control-sm datepicker" } })
+                            @Html.ValidationMessageFor(model => model.HepBDate2, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-1">#3 Date</label>
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.HepBDate3, new { htmlAttributes = new { @class = "form-control form-control-sm datepicker" } })
+                            @Html.ValidationMessageFor(model => model.HepBDate3, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-3"></div>
+                        <div class="col-md-12"> <span class="c"><strong>Hep A </strong></span></div>
+                        <label class="col-form-label col-md-1">#1 Date</label>
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.HepADate1, new { htmlAttributes = new { @class = "form-control form-control-sm datepicker" } })
+                            @Html.ValidationMessageFor(model => model.HepADate1, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-1">#2 Date</label>
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.HepADate2, new { htmlAttributes = new { @class = "form-control form-control-sm datepicker" } })
+                            @Html.ValidationMessageFor(model => model.HepADate2, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-1">#3 Date</label>
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.HepADate3, new { htmlAttributes = new { @class = "form-control form-control-sm datepicker" } })
+                            @Html.ValidationMessageFor(model => model.HepADate3, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-3"></div>
+                        <label class="col-form-label col-md-1">Other</label>
+                        <div class="col-md-11">
+                            @Html.TextAreaFor(model => model.Other, 3, 97, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                            @Html.ValidationMessageFor(model => model.Other, "", new { @class = "text-danger" })
+                        </div>
+
+
+                        <label class="col-form-label col-md-1">Date</label>
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.OtherDate, new { htmlAttributes = new { @class = "form-control form-control-sm datepicker" } })
+                            @Html.ValidationMessageFor(model => model.OtherDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="offset-10 col-md-2">
+                    <input type="submit" value="Update" class="btn btn-primary" />
+                    <a class="btn btn-danger" href="@Url.Action("Index")">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

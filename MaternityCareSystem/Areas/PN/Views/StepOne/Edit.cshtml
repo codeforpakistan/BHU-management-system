@@ -1,0 +1,82 @@
+﻿@model MaternityCareSystem.Areas.PN.DataModels.PreNatal_Step1
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="ibox ">
+        <div class="ibox-title"><h5>Take input for Pregnancy Plan</h5></div>
+        <div class="ibox-content">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.PreNatalStep1Id)
+
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="form-row">
+                        <label class="col-form-label col-md-6">Patient Name</label>
+                        <div class="col-md-6">
+                            @Html.DropDownListFor(model => model.PatientId, null, htmlAttributes: new { @class = "form-control form-control-sm select2" })
+                            @Html.ValidationMessageFor(model => model.PatientId, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-6">Date of Last Menstrual Period</label>
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.LastMestrualDate, new { htmlAttributes = new { @class = "form-control form-control-sm datepicker" } })
+                            @Html.ValidationMessageFor(model => model.LastMestrualDate, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-6">Expected Date of Delivery (EDD)</label>
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.EDD, new { htmlAttributes = new { @class = "form-control form-control-sm", @readonly = "reaonly" } })
+                            @Html.ValidationMessageFor(model => model.EDD, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-6">Expected Gestational Age (EGA)</label>
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.EGA, new { htmlAttributes = new { @class = "form-control form-control-sm", @readonly = "reaonly" } })
+                            @Html.ValidationMessageFor(model => model.EGA, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-6">Para</label>
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.Para, new { htmlAttributes = new { @class = "form-control form-control-sm numbers" } })
+                            @Html.ValidationMessageFor(model => model.Para, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-6">Gravida</label>
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.Gravida, new { htmlAttributes = new { @class = "form-control form-control-sm numbers" } })
+                            @Html.ValidationMessageFor(model => model.Gravida, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-6">Abortions</label>
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.Abortions, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                            @Html.ValidationMessageFor(model => model.Abortions, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-6">Last Baby Born</label>
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.LastBabyBorn, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                            @Html.ValidationMessageFor(model => model.LastBabyBorn, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <div class="offset-10 col-md-2">
+                    <button class="btn btn-primary" type="submit"><strong>Update</strong></button>
+                    <a class="btn btn-danger" href="@Url.Action("Index")"><strong>Cancel</strong></a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/Pnjs/stepOne.js"></script>
+   }

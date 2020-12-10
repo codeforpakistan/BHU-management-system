@@ -1,0 +1,174 @@
+﻿@model IEnumerable<MaternityCareSystem.Areas.PN.DataModels.PreNatal_LabTest>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class="ibox-content">
+        <div class="ibox-title"><h5>Lab Tests</h5></div>
+        <div class="row">
+            <div class="col-md-4">
+                <a class="btn btn-w-m btn-primary" href="@Url.Action("Create")"><i class="fa fa-plus"></i> Add New</a>
+            </div>
+            <div class="col-md-4 offset-4 float-right">
+                <div class="input-group">
+                    <input type="text" id="txt-search-patient" placeholder="Search..." class="form-control">
+                    <span class="input-group-append">
+                        <button type="button" class="btn btn-primary">
+                            <i class="fa fa-search"></i> Search
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <table class="table table-bordered table-responsive mt-1">
+            <thead>
+                <tr>
+                    <th>
+                       Patient Name
+                    </th>
+                    <th>
+                        Visit
+                    </th>
+                    <th>
+                        Checkup Of
+                    </th>
+                    <th>
+                       Current EGA Week
+                    </th>
+                    <th>
+                       Hgb
+                    </th>
+                    <th>
+                        Blood Group
+                    </th>
+                    <th>
+                       HepB
+                    </th>
+                    <th>
+                        Protein
+                    </th>
+                    <th>
+                       Glucose
+                    </th>
+                    <th>
+                       Blood Sugar
+                    </th>
+                    <th>
+                      WBC
+                    </th>
+                    <th>
+                        Gram Stain
+                    </th>
+                    <th>
+                      Keytone
+                    </th>
+                    <th>
+                       Blood
+                    </th>
+                    <th>
+                        Nitrite
+                    </th>
+                    <th>
+                        SpecificGravity
+                    </th>
+                    <th>
+                       Prenatal Ultrasound
+                    </th>
+                    <th>
+                      Actions
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PatientName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.VisitNo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CheckupOf)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CurrentEgaWeek)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Hgb)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BloodGroup)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HepB)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Protein)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Glucose)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BloodSugar)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.WBC)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.GramStain)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Keytone)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Blood)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nitrite)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SpecificGravity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PrenatalUltrasound)
+                        </td>
+                        <td>
+                            <a class="btn btn-primary btn-sm" href="@Url.Action("Edit", new { id = item.TestId })">Edit</a>
+                            <a class="btn btn-danger btn-sm text-white" data-testid="@item.TestId" onclick="deleteLabTest(this)">Remove</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section scripts{
+    <script>
+        function deleteLabTest(objRef) {
+     
+            var tid = $(objRef).data('testid');
+            var tr = $(objRef).parent('td').parent('tr');
+            ngo.HTML.Confirm.Show({ message: "Do you want to delete", title: "warning", type: "warning" }, function () {
+                $.ajax({
+                    url: "/PN/LabTest/DeleteLabTest",
+                    contentType: "application/json",
+                    dataType: "Json",
+                    data: "{testId:'" + tid + "'}",
+                    type: "Post",
+                    success: function (data) {
+                        if (!data.result.Error) {
+                            ngo.HTML.Alert.Show({ message: "Record deleted successfully", title: "success", type: "success" });
+                            $(tr).fadeOut(500);
+                        }
+                    }
+                });
+            });
+        }
+    </script>
+}

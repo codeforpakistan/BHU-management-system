@@ -1,0 +1,35 @@
+﻿@model int?
+@{
+    ViewBag.Title = "VisitSummary";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="ibox">
+    <div class="ibox-content">
+        <div class="row">
+            <div class="offset-8 col-md-4">
+
+                @using (Html.BeginForm())
+                {
+                    <div class="input-group">
+                        <input type="text" id="MrNumber" autofocus name="MrNumber" required="required" placeholder="MR Number" class="form-control">
+                        <span class="input-group-append">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-search"></i> Search
+                            </button>
+                        </span>
+                    </div>
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+@if (Model != 0)
+{
+    <div>
+        @Html.Action("GetVisitSummary", "GrowthChart", new { area = "PN", MrNumber = Model })
+    </div>
+}
+
+

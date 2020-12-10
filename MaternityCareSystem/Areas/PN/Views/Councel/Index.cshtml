@@ -1,0 +1,119 @@
+﻿@model IEnumerable<MaternityCareSystem.Areas.PN.DataModels.PreNatal_Counsel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class="ibox-content">
+        <div class="ibox-title">Counsel</div>
+        <div class="row">
+            <div class="col-md-4">
+                <a class="btn btn-w-m btn-primary" href="@Url.Action("Create")"><i class="fa fa-plus"></i> Add New Counsel</a>
+            </div>
+            <div class="col-md-4 offset-4 float-right">
+                <div class="input-group">
+                    <input type="text" id="txt-search-patient" placeholder="Search..." class="form-control">
+                    <span class="input-group-append">
+                        <button type="button" class="btn btn-primary">
+                            <i class="fa fa-search"></i> Search
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <table class="table table-bordered mt-1">
+            <thead>
+                <tr>
+                    <th>
+                        Patient Name
+                    </th>
+                    <th>
+                       Visit
+                    </th>
+                    <th>
+                       Checkup Of
+                    </th>
+                    <th>
+                        Danger Signs
+                    </th>
+                    <th>
+                       Hgb
+                    </th>
+                    <th>
+                       Protein
+                    </th>
+                    <th>
+                        Next Visit Date
+                    </th>
+                    <th>
+                        Nex tVisit Notes
+                    </th>
+                    <th>
+                      Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PatientName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.VisitNo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CheckupOf)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DangerSigns)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Hgb)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Protein)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NextVisitDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NextVisitNotes)
+                        </td>
+                        <td>
+                            <a class="btn btn-primary btn-sm" href="@Url.Action("Edit", new { id = item.PreNatalcounselId })">Edit</a>
+                            <a class="btn btn-danger btn-sm text-white" data-coucelid="@item.PreNatalcounselId" onclick="deleteCouncel(this)">Remove</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        function deleteCouncel(objRef) {
+            var id = $(objRef).data('coucelid');
+            var tr = $(objRef).parent('td').parent('tr');
+            ngo.HTML.Confirm.Show({ message: "Do you want to delete", title: "warning", type: "warning" }, function () {
+                $.ajax({
+                    url: "/PN/Councel/DeleteCouncel",
+                    contentType: "application/json",
+                    dataType: "Json",
+                    data: "{councelId:'" + id + "'}",
+                    type: "Post",
+                    success: function (data) {
+                        if (!data.result.Error) {
+                            ngo.HTML.Alert.Show({ message: "Record deleted successfully", title: "success", type: "success" });
+                            $(tr).fadeOut(500);
+                        }
+                    }
+                });
+            });
+        }
+    </script>
+}

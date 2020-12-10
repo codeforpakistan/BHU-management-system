@@ -1,0 +1,73 @@
+﻿@model Int64?
+@{
+    ViewBag.Title = "PrenataPhysicalExamination";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="ibox">
+    <div class="ibox-content">
+        <div class="row">
+            @*<div class="col-md-3">
+                <div class="form-group">
+                    @Html.TextBox("MotherName", null, htmlAttributes: new { @class = "form-control", @placeholder = "Mother Name" })
+                </div>
+            </div>*@
+           
+            <div class="offset-8 col-md-4">
+
+                @using (Html.BeginForm())
+                {
+                    <div class="input-group">
+                        <input type="text"id="MrNumber" autofocus name="MrNumber" required="required" placeholder="MR Number" class="form-control">
+                        <span class="input-group-append">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-search"></i> Search
+                            </button>
+                        </span>
+                    </div>
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+@if ( Model != 0)
+{
+    <div class="row">
+       
+        <div class="col-lg-12">
+            <div class="tabs-container">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li><a class="nav-link active" data-toggle="tab" href="#tab-1">Physical Examination</a></li>
+                    <li><a class="nav-link " data-toggle="tab" href="#tab-2">Lab Tests</a></li>
+                    <li><a class="nav-link " data-toggle="tab" href="#tab-3">Medication</a></li>
+                    <li><a class="nav-link " data-toggle="tab" href="#tab-4">Counsel</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div role="tabpanel" id="tab-1" class="tab-pane active">
+                        <div class="panel-body">
+                            @Html.Action("PrenatalPhyExamPartial", "PreNatalPhyExamination", new { area = "PN", mrno = Model })
+                        </div>
+                    </div>
+                    <div role="tabpanel" id="tab-2" class="tab-pane ">
+                        <div class="panel-body">
+                            @Html.Action("LabtestPartial", "LabTest", new { area = "PN", mrno = Model })
+                        </div>
+                    </div>
+                    <div role="tabpanel" id="tab-3" class="tab-pane ">
+                        <div class="panel-body">
+                            @Html.Action("MedicationPartial", "Medication", new { area = "PN", mrno = Model })
+                        </div>
+                    </div>
+                    <div role="tabpanel" id="tab-4" class="tab-pane ">
+                        <div class="panel-body">
+                            @Html.Action("CounselPartial", "Councel", new { area = "PN", mrno = Model })
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+}

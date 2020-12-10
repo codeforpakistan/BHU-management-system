@@ -1,0 +1,52 @@
+﻿@model System.Data.DataTable
+@using System.Data;
+@{ 
+    var pName = "";
+    if (Model.Rows.Count > 0)
+    {
+        pName = Model.Rows[0]["PatientName"].ToString();
+    }
+}
+    <div class="ibox">
+        <div class="ibox-content">
+            <div class="ibox-title"><h5>Visit Summary</h5></div>
+            <label>Patient Name: <strong>@pName</strong></label>
+            <table class="table table-bordered" id="tbl-summary">
+                <thead class="bg-secondary">
+                    <tr>
+                        @foreach (DataColumn col in Model.Columns)
+                        {
+                            if (col.ColumnName.ToLower() != "patientname")
+                            {
+                                <th class="font-weight-bold @col.ColumnName">@col.ColumnName</th>
+                            }
+                        }
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (DataRow row in Model.Rows)
+                    {
+                        <tr>
+                            @foreach (DataColumn col in Model.Columns)
+                            {
+                                if (col.ColumnName.ToLower() != "patientname")
+                                {
+                                    if (@row[col.ColumnName] == DBNull.Value)
+                                    {
+                                        <td>0</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@row[col.ColumnName]</td>
+                                    }
+                                }
+                            }
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>

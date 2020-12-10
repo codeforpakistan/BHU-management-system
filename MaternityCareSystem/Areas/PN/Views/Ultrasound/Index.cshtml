@@ -1,0 +1,323 @@
+﻿@model IEnumerable<MaternityCareSystem.Areas.PN.DataModels.Ultrasound>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class="ibox-content">
+        <div class="ibox-title"><h5>Ultrasound Reports</h5></div>
+        <div class="row">
+            <div class="col-md-4">
+                <a class="btn btn-w-m btn-primary" href="@Url.Action("Create")"><i class="fa fa-plus"></i> Add New</a>
+            </div>
+            <div class="col-md-4 offset-4 float-right" hidden>
+                <div class="input-group">
+                    <input type="text" id="txt-search-patient" placeholder="Search..." class="form-control">
+                    <span class="input-group-append">
+                        <button type="button" class="btn btn-primary">
+                            <i class="fa fa-search"></i> Search
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <table class="table table-bordered  mt-1">
+            <thead>
+                <tr>
+                 
+                    <th>
+                        @Html.DisplayNameFor(model => model.PatientName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Date)
+                    </th>
+                    <th>
+                       LMP
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EDD)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EGA)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Placenta)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Grade)
+                    </th>
+                    @*<th>
+                        @Html.DisplayNameFor(model => model.Cord)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AmnioticFluidVolume)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Gender)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NoOfFetuses)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Position)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Breathing)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Movement)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Face)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Brain)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Spine)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Lungs)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.HeartChamber)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.HeartCondition)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.HeartRate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Stomach)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ExtLeftArms)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ExtRightArms)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ExtLeftLegs)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ExtRightLegs)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CRL)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CRLEGA)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FemurLength)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FemurLengthEGA)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BPD)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BPDEGA)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.HeadCircumference)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.HeadCircumferenceEGA)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AbdCircumference)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AbdEGA)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EFetalWeight)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ThirdFermurLength)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ThirdBPD)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ThirdEGA)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ThirdEstimatedFetalWeight)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Comments)
+                    </th>*@
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                       
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PatientName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LastMenstrualPeriod)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EDD)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EGA)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Placenta)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Grade)
+                        </td>
+                        @*<td>
+                            @Html.DisplayFor(modelItem => item.Cord)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AmnioticFluidVolume)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Gender)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NoOfFetuses)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Position)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Breathing)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Movement)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Face)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Brain)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Spine)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Lungs)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HeartChamber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HeartCondition)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HeartRate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Stomach)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ExtLeftArms)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ExtRightArms)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ExtLeftLegs)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ExtRightLegs)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CRL)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CRLEGA)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FemurLength)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FemurLengthEGA)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BPD)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BPDEGA)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HeadCircumference)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HeadCircumferenceEGA)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AbdCircumference)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AbdEGA)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EFetalWeight)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ThirdFermurLength)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ThirdBPD)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ThirdEGA)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ThirdEstimatedFetalWeight)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Comments)
+                        </td>*@
+                        <td>
+                            <a class="btn btn-primary btn-sm" href="@Url.Action("Edit", new { id = item.UltrasoundId })">Edit</a>
+                            <a class="btn btn-danger btn-sm text-white" data-pid="@item.UltrasoundId" onclick="deleteUS(this)">Remove</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        function deleteUS(objRef) {
+            var pid = $(objRef).data('pid');
+            var tr = $(objRef).parent('td').parent('tr');
+            ngo.HTML.Confirm.Show({ message: "Do you want to delete", title: "warning", type: "warning" }, function () {
+                $.ajax({
+                    url: "/PN/Ultrasound/Delete",
+                    contentType: "application/json",
+                    dataType: "Json",
+                    data: "{id:'" + pid + "'}",
+                    type: "Post",
+                    success: function (data) {
+                        if (!data.result.Error) {
+                            ngo.HTML.Alert.Show({ message: "Record deleted successfully", title: "success", type: "success" });
+                            $(tr).fadeOut(500);
+                        }
+                    }
+                });
+            });
+        }
+    </script>
+}

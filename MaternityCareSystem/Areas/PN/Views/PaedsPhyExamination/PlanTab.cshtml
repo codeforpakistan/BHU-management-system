@@ -1,0 +1,149 @@
+﻿@model MaternityCareSystem.Areas.PN.DataModels.PreNatal_Plan
+@{
+    ViewBag.Title = "PlanTab";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<link href="~/Content/css/plugins/steps/jquery.steps.css" rel="stylesheet" />
+<script src="~/Scripts/js/plugins/steps/jquery.steps.min.js"></script>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Gynae Form</h5>
+                <div class="ibox-tools">
+
+
+                </div>
+            </div>
+            <div class="ibox-content">
+
+                <div class="row" hidden>
+                    @*<div class="col-md-3">
+                            <div class="form-group">
+                                @Html.TextBox("MotherName", null, htmlAttributes: new { @class = "form-control", @placeholder = "Mother Name" })
+                            </div>
+                        </div>*@
+
+                    <div class="col-md-4 offset-8">
+
+                        @using (Html.BeginForm("", "", new { area = "PN" }, FormMethod.Get))
+                        {
+                            <div class="input-group">
+                                <input type="text" id="MrNumber" name="MrNumber" required="required" placeholder="MR Number" class="form-control">
+                                <span class="input-group-append">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fa fa-search"></i> Search
+                                    </button>
+                                </span>
+                            </div>
+
+                        }
+                    </div>
+
+                </div>
+
+                @using (Html.BeginForm("PlanTab", "PaedsPhyExamination", new { Area = "PN" }, FormMethod.Post, htmlAttributes: new
+                {
+                    @class = "wizard-big wizard clearfix"
+                }))
+                {
+                    <div class="steps clearfix mt-1">
+                        <ul role="tablist">
+                            <li role="tab" class="disabled" aria-disabled="false" aria-selected="true">
+                                <a id="form-t-0" href="#form-h-0" aria-controls="form-p-0">
+                                    <span class="number">1.</span>General
+                                </a>
+                            </li>
+                            <li role="tab" class="disabled" aria-disabled="false" aria-selected="true">
+                                <a id="form-t-1" href="#form-h-1" aria-controls="form-p-1">
+
+                                    <span class="number">2.</span>Physical Examination
+                                </a>
+                            </li>
+                            <li role="tab" class="disabled" aria-disabled="false" aria-selected="true">
+                                <a id="form-t-2" href="#form-h-2" aria-controls="form-p-2">
+                                    <span class="number">3.</span> Lab Test
+                                </a>
+                            </li>
+                            <li role="tab" class="disabled" aria-disabled="false" aria-selected="true">
+                                <a id="form-t-3" href="#form-h-3" aria-controls="form-p-3">
+                                    <span class="number">4.</span> Assessemnt
+                                </a>
+                            </li>
+                            <li role="tab" class="disabled" aria-disabled="false" aria-selected="true">
+                                <a id="form-t-4" href="#form-h-4" aria-controls="form-p-4">
+                                    <span class="number">5.</span> Medication
+                                </a>
+                            </li>
+                            <li role="tab" class="current last" aria-disabled="false" aria-selected="true">
+                                <a id="form-t-5" href="#form-h-5" aria-controls="form-p-5">
+                                    <span class="current-info audible">current step: </span>
+                                    <span class="number">6.</span> Plan
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="content clearfix">
+                        <h1 id="form-h-0" tabindex="-1" class="title current">General</h1>
+
+                        <fieldset>
+                        </fieldset>
+
+                        <h1 id="form-h-1" tabindex="-1" class="title disabled">Physical Examination</h1>
+                        <fieldset>
+                        </fieldset>
+
+                        <h1 id="form-h-2" tabindex="-1" class="title disabled">Lab Test</h1>
+                        <fieldset id="form-p-2" role="tabpanel" aria-labelledby="form-h-2" class="body">
+                        </fieldset>
+
+                        <h1 id="form-h-3" tabindex="-1" class="title disabled">Assessment</h1>
+                        <fieldset id="form-p-3" role="tabpanel" aria-labelledby="form-h-3">
+                        </fieldset>
+
+                        <h1 id="form-h-4" tabindex="-1" class="title disabled">Medication</h1>
+                        <fieldset id="form-p-4" role="tabpanel" aria-labelledby="form-h-4">
+                        </fieldset>
+                        <h1 id="form-h-5" tabindex="-1" class="title disabled">Plan</h1>
+                        <fieldset id="form-p-5" role="tabpanel" aria-labelledby="form-h-4">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">Patient Name</label>
+                                    <div class="col-md-4">
+                                        @Html.DropDownListFor(x => x.PatientId, null, htmlAttributes: new { @class = "form-control select2" })
+                                        @Html.ValidationMessageFor(model => model.PatientId, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-4">
+                                        @Html.TextAreaFor(model => model.Notes, 3, 66, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="actions clearfix">
+                        <ul role="menu" aria-label="Pagination">
+                            @*<li class="" aria-disabled="false">
+                                    <a href="@Url.Action("GetDetails","PhysicalExamination",new {id=Model.PatientId })" role="menuitem">Previous</a>
+                                </li>*@
+                            <li aria-hidden="false" aria-disabled="false"><button id="btn-save-physical" type="submit" class="btn btn-primary btn-block">Next</button></li>
+                            @*<li aria-hidden="true" style="display: none;"><a href="#finish" role="menuitem">Finish</a></li>*@
+                        </ul>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+

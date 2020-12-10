@@ -1,0 +1,83 @@
+﻿@model IEnumerable<MaternityCareSystem.Areas.PN.DataModels.PreNatal_Plan>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+<div class="col-md-12">
+    <div class="ibox-content">
+        <div class="ibox-title"><h5>Plans</h5></div>
+        <div class="row">
+            <div class="col-md-4">
+                <a class="btn btn-w-m btn-primary" href="@Url.Action("Create")"><i class="fa fa-plus"></i> Add New</a>
+            </div>
+            <div class="col-md-4 offset-4 float-right">
+                <div class="input-group">
+                    <input type="text" id="txt-search-patient" placeholder="Search..." class="form-control">
+                    <span class="input-group-append">
+                        <button type="button" class="btn btn-primary">
+                            <i class="fa fa-search"></i> Search
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <table class="table table-bordered mt-1">
+            <thead>
+                <tr>
+
+                    <th>
+                       Patient Name
+                    </th>
+                    <th>
+                        Notes
+                    </th>
+                    <th style="width:20%">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PatientName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Notes)
+                        </td>
+                        <td>
+                            <a class="btn btn-primary btn-sm" href="@Url.Action("Edit", new { id = item.PreNatalPlanId })">Edit</a>
+                            <a class="btn btn-danger btn-sm text-white" data-pid="@item.PreNatalPlanId" onclick="deletePlan(this)">Remove</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section scripts{
+    <script>
+        function deletePlan(objRef) {
+            var pid = $(objRef).data('pid');
+            var tr = $(objRef).parent('td').parent('tr');
+            ngo.HTML.Confirm.Show({ message: "Do you want to delete", title: "warning", type: "warning" }, function () {
+                $.ajax({
+                    url: "/PN/Plan/Delete",
+                    contentType: "application/json",
+                    dataType: "Json",
+                    data: "{id:'" + pid + "'}",
+                    type: "Post",
+                    success: function (data) {
+                        if (!data.result.Error) {
+                            ngo.HTML.Alert.Show({ message: "Record deleted successfully", title: "success", type: "success" });
+                            $(tr).fadeOut(500);
+                        }
+                    }
+                });
+            });
+        }
+    </script>
+}

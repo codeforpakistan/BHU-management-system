@@ -1,0 +1,129 @@
+﻿@model MaternityCareSystem.Areas.PN.DataModels.PreNatal_LabTest
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.TestId)
+    <div class="ibox">
+        <div class="ibox-title"><h5>Edit Lab Test</h5></div>
+
+        <div class="ibox-content">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-row">
+                        <label class="col-form-label col-md-1">Patient Name</label>
+                        <div class="col-md-3">
+                            @Html.DropDownListFor(model => model.PatientId, null, htmlAttributes: new { @class = "form-control form-control-sm select2" })
+                            @Html.ValidationMessageFor(model => model.PatientId, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-1">Visit</label>
+                        <div class="col-md-3">
+                            @Html.DropDownListFor(model => model.VisitNo, null, htmlAttributes: new { @class = "form-control form-control-sm " })
+                            @Html.ValidationMessageFor(model => model.VisitNo, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-1">Checkup Of</label>
+                        <div class="col-md-3">
+                            @Html.DropDownListFor(model => model.CheckupOf, null, htmlAttributes: new { @class = "form-control form-control-sm" })
+                            @Html.ValidationMessageFor(model => model.CheckupOf, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-9">
+                    <div class="form-row">
+                        <label class="col-form-label col-md-3">Hgb</label>
+                        <div class="col-md-3">
+                            @Html.EditorFor(model => model.Hgb, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                            @Html.ValidationMessageFor(model => model.Hgb, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-2">Blood Group</label>
+                        <div class="col-md-3">
+                            @Html.DropDownListFor(model => model.BloodGroup, null, htmlAttributes: new { @class = "form-control form-control-sm" })
+                            @Html.ValidationMessageFor(model => model.BloodGroup, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-3">Hep B</label>
+                        <div class="checkbox col-md-3">
+                            @Html.CheckBoxFor(model => model.HepB, htmlAttributes: new { @class = " " })
+                            @Html.ValidationMessageFor(model => model.HepB, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6"></div>
+                        <label class="col-form-label col-md-3">Urine</label>
+                        <div class="col-md-3">
+                            @Html.DropDownListFor(model => model.Protein, null, htmlAttributes: new { @class = "form-control form-control-sm" })
+                            @Html.ValidationMessageFor(model => model.Protein, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6"></div>
+                        <div class="offset-3 col-md-3">
+                            @Html.DropDownListFor(model => model.Glucose, null, htmlAttributes: new { @class = "form-control form-control-sm" })
+                            @Html.ValidationMessageFor(model => model.Glucose, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-3">Blood Sugar(if urine glucose +)</label>
+                        <div class="col-md-3">
+                            @Html.EditorFor(model => model.BloodSugar, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                            @Html.ValidationMessageFor(model => model.BloodSugar, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="offset-3 col-md-3">
+                            @Html.DropDownListFor(model => model.WBC, null, htmlAttributes: new { @class = "form-control form-control-sm" })
+                            @Html.ValidationMessageFor(model => model.WBC, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-3">Gram Stain (if WBC+)</label>
+                        <div class="col-md-3">
+                            @Html.EditorFor(model => model.GramStain, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                            @Html.ValidationMessageFor(model => model.GramStain, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="offset-3 col-md-3">
+                            @Html.DropDownListFor(model => model.Keytone, null, htmlAttributes: new { @class = "form-control form-control-sm" })
+                            @Html.ValidationMessageFor(model => model.Keytone, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6"></div>
+                        <div class="offset-3 col-md-3 mt-1">
+                            @Html.DropDownListFor(model => model.Blood, null, htmlAttributes: new { @class = "form-control form-control-sm" })
+                            @Html.ValidationMessageFor(model => model.Blood, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6"></div>
+                        <label class="col-form-label col-md-3">Nitrite</label>
+                        <div class="checkbox col-md-3 mt-1">
+                            @Html.CheckBoxFor(model => model.Nitrite, htmlAttributes: new { @class = " " })
+                            @Html.ValidationMessageFor(model => model.Nitrite, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6"></div>
+                        <label class="col-form-label col-md-3">Specific Gravity</label>
+                        <div class="col-md-3">
+                            @Html.EditorFor(model => model.SpecificGravity, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                            @Html.ValidationMessageFor(model => model.SpecificGravity, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6"></div>
+                        <label class="col-form-label col-md-3">Pre-Natal Ultrasound</label>
+                        <div class="col-md-9">
+                            @Html.TextAreaFor(model => model.PrenatalUltrasound, 5, 97, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.PrenatalUltrasound, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="offset-10 col-md-2">
+                    <button class="btn btn-sm btn-primary" type="submit"><strong>Update</strong></button>
+                    <a class="btn btn-sm btn-danger" href="@Url.Action("Index")"><strong>Cancel</strong></a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

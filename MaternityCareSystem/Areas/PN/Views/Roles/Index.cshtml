@@ -1,0 +1,76 @@
+﻿@model IEnumerable<MaternityCareSystem.Models.ProcModels.RolesViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+<div class="col-md-12">
+    <div class="ibox-content">
+        <div class="ibox-title"><h5>Users</h5></div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        User Name
+                    </th>
+                    <th>
+                        Role
+                    </th>
+                    <th>
+                       Email
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Role)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    @if (item.IsLocked == true)
+                    {
+                        <td>
+                            <span class="label label-danger">Locked</span>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            <span class="label label-primary">Active</span>
+                        </td>
+                    }
+                    <td>
+                        <a class="btn btn-info btn-sm" href="@Url.Action("Edit", new { id = item.Id })">Edit</a>
+                    </td>
+          
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            $("#txt-search").keyup(function () {
+                searchTable("txt-search", "tbl");
+            });
+
+        });
+           
+    </script>
+}

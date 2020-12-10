@@ -1,0 +1,68 @@
+﻿@using Microsoft.AspNet.Identity
+@*@if (Request.IsAuthenticated)
+    {
+        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    @Html.ActionLink("Welcome " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                </li>
+                <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+            </ul>
+        }
+    }
+    else
+    {
+        <ul class="nav navbar-nav navbar-right">
+            <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+            <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        </ul>
+    }*@
+
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+    <li class="nav-header">
+        <div class="dropdown profile-element">
+            @*<img alt="image" class="rounded-circle" src="~/Content/img/profile_small.jpg" />*@
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                <span class="block m-t-xs font-bold"></span>
+                <span class="text-muted text-xs block">@User.Identity.GetUserName()<b class="caret"></b></span>
+            </a>
+            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                @*<li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><a class="dropdown-item" href="#">Contacts</a></li>
+                <li><a class="dropdown-item" href="#">Mailbox</a></li>*@
+                <li class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">Logout</a></li>
+            </ul>
+        </div>
+        <div class="logo-element">
+            HMS
+        </div>
+    </li>
+}
+}
+else
+{
+<li class="nav-header">
+    <div class="dropdown profile-element">
+        @*<img alt="image" class="rounded-circle" src="~/Content/img/profile_small.jpg" />*@
+        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+            <span class="block m-t-xs font-bold"></span>
+            <span class="text-muted text-xs block">User<b class="caret"></b></span>
+        </a>
+        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+            <li class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="@Url.Action("Login", "Account")">Login</a></li>
+        </ul>
+    </div>
+    <div class="logo-element">
+        HMS
+    </div>
+</li>
+}

@@ -1,0 +1,186 @@
+﻿@model IEnumerable<MaternityCareSystem.Areas.PN.DataModels.PreNatal_Step2>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class="ibox-content">
+        <div class="ibox-title"><h5>Previous Pregnancy Data</h5></div>
+        <div class="row">
+            <div class="col-md-4">
+                <a class="btn btn-w-m btn-primary" href="@Url.Action("Create")"><i class="fa fa-plus"></i> Add New</a>
+            </div>
+            <div class="col-md-4 offset-4 float-right">
+                <div class="input-group">
+                    <input type="text" id="txt-search-patient" placeholder="Search..." class="form-control">
+                    <span class="input-group-append">
+                        <button type="button" class="btn btn-primary">
+                            <i class="fa fa-search"></i> Search
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <table class="table table-bordered mt-1">
+            <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Date Of Delivery
+                    </th>
+                    <th>
+                        Bleeding
+                    </th>
+                    <th>
+                        BP
+                    </th>
+                    <th>
+                        Still Birth
+                    </th>
+                    <th>
+                        Heavy Bleeding
+                    </th>
+                    <th>
+                        Kidney Problem
+                    </th>
+                    <th>
+                        Anemia
+                    </th>
+                    <th>
+                        CSection
+                    </th>
+                    <th>
+                        Eclampsia
+                    </th>
+                    <th>
+                        Fever
+                    </th>
+                    @*<th>
+                            Forceps Vaccum
+                        </th>
+                        <th>
+                            PreEcplampsia
+                        </th>
+                        <th>
+                            Twins
+                        </th>
+                        <th>
+                            tear
+                        </th>
+                        <th>
+                            sugar
+                        </th>
+                        <th>
+                            home
+                        </th>
+                        <th>
+                            maternity home
+                        </th>
+                        <th>
+                            hospital
+                        </th>*@
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PatientName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateOfDelivery)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CompBleeding)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CompBP)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CompStillBirth)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CompHeavyBleeding)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CompKidneyProblem)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CompAnemia)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CompCSection)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CompEclampsia)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CompFever)
+                        </td>
+                        @*<td>
+                            @Html.DisplayFor(modelItem => item.CompForcepsVaccum)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CompPreEcplampsia)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CompTwins)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CompTear)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CompSugar)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.homeDelivery)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MaternityHomeDelivery)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HospitalDelivery)
+                        </td>*@
+
+                        <td>
+                            <a class="btn btn-primary btn-sm" href="@Url.Action("Edit", new { id = item.PreNatalStep2Id })">Edit</a>
+                            <a class="btn btn-danger btn-sm text-white" data-pid="@item.PreNatalStep2Id" onclick="deletePrenatalStepTwo(this)">Remove</a>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section scripts{
+    <script>
+        function deletePrenatalStepTwo(objRef) {
+            var pid = $(objRef).data('pid');
+            var tr = $(objRef).parent('td').parent('tr');
+            ngo.HTML.Confirm.Show({ message: "Do you want to delete", title: "warning", type: "warning" }, function () {
+                $.ajax({
+                    url: "/PN/Steptwo/DeletePrenatalStepTwo",
+                    contentType: "application/json",
+                    dataType: "Json",
+                    data: "{id:'" + pid + "'}",
+                    type: "Post",
+                    success: function (data) {
+                        if (!data.result.Error) {
+                            ngo.HTML.Alert.Show({ message: "Record deleted successfully", title: "success", type: "success" });
+                            $(tr).fadeOut(500);
+                        }
+                    }
+                });
+            });
+        }
+    </script>
+}

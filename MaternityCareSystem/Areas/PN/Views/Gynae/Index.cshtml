@@ -1,0 +1,230 @@
+﻿@model IEnumerable<MaternityCareSystem.Areas.PN.DataModels.GynaeForm>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class="ibox-content">
+        <div class="ibox-title">Gynae</div>
+        <div class="row">
+            <div class="col-md-4">
+                <a class="btn btn-w-m btn-primary" href="@Url.Action("Create")"><i class="fa fa-plus"></i> Add New </a>
+            </div>
+            <div class="col-md-4 offset-4 float-right">
+                <div class="input-group">
+                    <input type="text" id="txt-search-patient" placeholder="Search..." class="form-control">
+                    <span class="input-group-append">
+                        <button type="button" class="btn btn-primary">
+                            <i class="fa fa-search"></i> Search
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <table class="table table-bordered table-responsive mt-1">
+            <thead>
+                <tr>
+                    <th>
+                       Patient Name
+                    </th>
+                    <th>
+                       Last Menstrual Date
+                    </th>
+                    <th>
+                       History
+                    </th>
+                    <th>
+                        Last Menstrual Begin
+                    </th>
+                    <th>
+                       Last Menstrual End
+                    </th>
+                    <th>
+                       NO.Of Days Bleeding
+                    </th>
+                    <th>
+                       Days
+                    </th>
+                    <th>
+                        Bleeding Type
+                    </th>
+                    <th>
+                     Pain
+                    </th>
+                    <th>
+                        Notes
+                    </th>
+                    <th>
+                       Cycle History
+                    </th>
+                    <th>
+                        Para
+                    </th>
+                    <th>
+                        Gravida
+                    </th>
+                    <th>
+                        Abortions
+                    </th>
+                    <th>
+                       Last Baby Born
+                    </th>
+                    <th>
+                       Infertility
+                    </th>
+                    <th>
+                       Married Years
+                    </th>
+                    <th>
+                       Husband
+                    </th>
+                    <th>
+                       History & Tests Wife
+                    </th>
+                    <th>
+                       Other Medical History
+                    </th>
+                    <th>
+                       CurrentMedication
+                    </th>
+                    <th>
+                       Pain
+                    </th>
+                    <th>
+                       Bleeding
+                    </th>
+                    <th>
+                        Discharge
+                    </th>
+                    <th>
+                       Burning
+                    </th>
+                    <th>
+                        Seizures
+                    </th>
+                    <th>
+                       Fits
+                    </th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PatientName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LastMenstrualDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.History)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LastMenstrualBegin)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LastMenstrualEnd)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NumberOfDaysBleeding)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Dayss)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BleedingCondition)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Pain)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PainNotes)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CycleHistory)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Para)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Gravida)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Abortions)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LastBabyBorn)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Infertility)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MarriedYears)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Husband)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HistoryAndTestsWife)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OtherMedicalHistory)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CurrentMedication)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ComplaintPain)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ComplaintBleeding)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ComplaintDischarge)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ComplaintUrineBurning)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ComplaintSeizures)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ComplaintFits)
+                        </td>
+                        <td>
+                            <a class="btn btn-primary btn-sm" href="@Url.Action("Edit", new { id = item.GynaeFormId })">Edit</a>
+                            <a class="btn btn-danger btn-sm text-white" data-gid="@item.GynaeFormId" onclick="deleteGynaeRecord(this)">Remove</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section scripts{
+    <script>
+        function deleteGynaeRecord(objRef) {
+            var gid = $(objRef).data('gid');
+            var tr = $(objRef).parent('td').parent('tr');
+            ngo.HTML.Confirm.Show({ message: "Do you want to delete", title: "warning", type: "warning" }, function () {
+                $.ajax({
+                    url: "/PN/Gynae/DeleteGynaeRecord",
+                    contentType: "application/json",
+                    dataType: "Json",
+                    data: "{id:'" + gid + "'}",
+                    type: "Post",
+                    success: function (data) {
+                        if (!data.result.Error) {
+                            ngo.HTML.Alert.Show({ message: "Record deleted successfully", title: "success", type: "success" });
+                            $(tr).fadeOut(500);
+                        }
+                    }
+                });
+            });
+        }
+    </script>
+}

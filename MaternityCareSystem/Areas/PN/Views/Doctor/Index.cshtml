@@ -1,0 +1,118 @@
+﻿@model IEnumerable<MaternityCareSystem.Areas.PN.DataModels.DoctorInfo>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class="ibox-content">
+        <div class="ibox-title"><h5>Doctors</h5></div>
+        <div class="row">
+            <div class="col-md-4">
+                <a class="btn btn-w-m btn-primary" href="@Url.Action("Create")"><i class="fa fa-plus"></i> Add New</a>
+            </div>
+            <div class="col-md-4 offset-4 float-right">
+                <div class="input-group">
+                    <input type="text" id="txt-search" placeholder="Search..." class="form-control">
+                    <span class="input-group-append">
+                        <button type="button" class="btn btn-primary">
+                            <i class="fa fa-search"></i> Search
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <table id="tbl" class="table table-bordered mt-1">
+            <thead>
+                <tr>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.DoctorName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Phone)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsAvailable)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Address)
+                    </th>
+                    <th>
+                       Specialization
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DoctorName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Phone)
+                    </td>
+                    @if (item.IsAvailable == true)
+                    {
+                        <td>
+                            <span class="label label-primary">Available</span>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            <span class="label label-danger">Not Available</span>
+                        </td>
+                    }
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        <a class="btn btn-primary btn-sm" href="@Url.Action("Edit", new { id = item.DoctorId })">Edit</a>
+                        <a class="btn btn-danger btn-sm text-white" data-pid="@item.DoctorId" onclick="deleteDoc(this)">Remove</a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+         $(document).ready(function () {
+
+            $("#txt-search").keyup(function () {
+                searchTable("txt-search", "tbl");
+            });
+
+        });
+        function deleteDoc(objRef) {
+            var pid = $(objRef).data('pid');
+            var tr = $(objRef).parent('td').parent('tr');
+            ngo.HTML.Confirm.Show({ message: "Do you want to delete", title: "warning", type: "warning" }, function () {
+                $.ajax({
+                    url: "/PN/Doctor/Delete",
+                    contentType: "application/json",
+                    dataType: "Json",
+                    data: "{id:'" + pid + "'}",
+                    type: "Post",
+                    success: function (data) {
+                        if (!data.result.Error) {
+                            ngo.HTML.Alert.Show({ message: "Record deleted successfully", title: "success", type: "success" });
+                            $(tr).fadeOut(500);
+                        }
+                    }
+                });
+            });
+        }
+    </script>
+}

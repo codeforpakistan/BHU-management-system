@@ -1,0 +1,635 @@
+﻿
+@{
+    ViewBag.Title = "Charts";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+<div class="row">
+    <div class="col-sm-6 col-md-6 col-lg-6">
+        <div class="ibox ">
+
+            <div class="ibox-content">
+                <div id="ch-boys-weight"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-6 col-lg-6">
+        <div class="ibox ">
+
+            <div class="ibox-content">
+                <div id="ch-boys-height"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6 col-md-6 col-lg-6">
+        <div class="ibox ">
+
+            <div class="ibox-content">
+                <div id="ch-girls-weight"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-6 col-lg-6">
+        <div class="ibox ">
+
+            <div class="ibox-content">
+                <div id="ch-girls-height"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6 col-md-6 col-lg-6">
+        <div class="ibox ">
+
+            <div class="ibox-content">
+                <div id="ch-boys-Length"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-6 col-lg-6">
+        <div class="ibox ">
+
+            <div class="ibox-content">
+                <div id="ch-girls-Length"></div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/Scripts/js/hightCharts/series-label.js"></script>
+    <script src="~/Scripts/js/hightCharts/accessibility.js"></script>
+    <script>
+
+    $(function () {
+        drawChartForWeightBoys();
+        drawChartForHeightBoys();
+        drawChartForWeightGirls();
+        drawChartForHeightGirls();
+        drawChartForLengthBoys();
+        drawChartForLengthGirls();
+    });
+    function drawChartForWeightBoys() {
+
+            var url = "@Url.Action("GetMaleWeight", "GrowthChart", new { area = "PN" })"
+
+            $.ajax({
+                url: url,
+                type: "get",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (response) {
+                    let age = [], weight = [];
+                    $.each(response, function (i, x) {
+                        age.push(x.Age);
+                        weight.push(x.Weight);
+
+                    });
+                    LineChartForWeightBoys(age, weight);
+
+                }
+            })
+        }
+    function LineChartForWeightBoys(age, weight) {
+
+
+            Highcharts.chart('ch-boys-weight', {
+           
+                title: {
+                    text: 'Weight-for-Age Boys',
+                    style: {color:'#1c84c6',font: 'bold 16px "Trebuchet MS", Verdana, sans-serif'}
+                },
+
+                subtitle: {
+                    text: '2 to 5 years Percentiles '
+                },
+
+                yAxis: {
+                    title: {
+                        text: 'Weight (Kg)'
+                    }
+                },
+
+                xAxis: {
+
+                    categories: ['1 year', '2 years', '3 years', '4 years', '5 years'],
+                     min: 0,
+                     max: 4,
+                    labels: {
+                        step: 1
+                    },
+
+                    title: {
+                        text: 'Age (years)'
+                    },
+                    accessibility: {
+                        rangeDescription: 'Range: 1 to 5 years',
+                        //tickInterval: 5
+                    }
+                },
+
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                plotOptions: {
+
+                    series: {
+                         labels: {
+                            connectorAllowed: false
+                        },
+                        //pointStart: 0
+                    }
+                },
+
+                series: [{
+                    name: 'Age',
+                    data: age
+                }, {
+                    name: 'Weight',
+                    data: weight
+                }]
+
+            });
+        }
+
+    function drawChartForHeightBoys() {
+
+     var url = "@Url.Action("GetMaleHeight", "GrowthChart", new { area = "PN" })"
+
+            $.ajax({
+                url: url,
+                type: "get",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (response) {
+                    let age = [], height = [];
+                    $.each(response, function (i, x) {
+                        age.push(x.Age);
+                        height.push(parseInt(x.HC));
+
+                    });
+                    LineChartForHeightBoys(age, height);
+
+                }
+            })
+        }
+    function LineChartForHeightBoys(age, height) {
+            Highcharts.chart('ch-boys-height', {
+                title: {
+                    text: 'Height-for-Age Boys',
+                    style: {color:'#1c84c6',font: 'bold 16px "Trebuchet MS", Verdana, sans-serif'}
+
+                },
+
+                subtitle: {
+                    text: '2 to 5 years Percentiles '
+                },
+                yAxis: {
+
+                    title: {
+                        text: 'Height (cm)'
+                    }
+                },
+                xAxis: {
+
+                    categories: ['1 year', '2 years', '3 years', '4 years', '5 years'],
+                     min: 0,
+                     max: 4,
+                    labels: {
+                        step: 1
+                    },
+
+                    title: {
+                        text: 'Age (years)'
+                    },
+                    accessibility: {
+                        rangeDescription: 'Range: 1 to 5 years',
+                        tickInterval:5
+                    }
+                },
+
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                plotOptions: {
+
+                    series: {
+                         label: {
+                            connectorAllowed: false
+                        },
+                        //pointStart: 0
+                    }
+                },
+
+                series: [{
+                    name: 'Age',
+                    data: age
+                }, {
+                    name: 'Height',
+                    data: height
+                }],
+                responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                        }
+                    }
+                }]
+            }
+       });
+ }
+
+
+    function drawChartForWeightGirls() {
+
+            var url = "@Url.Action("GetFemaleWeight", "GrowthChart", new { area = "PN" })"
+
+            $.ajax({
+                url: url,
+                type: "get",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (response) {
+                   
+                    let age = [], weight = [];
+                    $.each(response, function (i, x) {
+                        age.push(x.Age);
+                        weight.push(x.Weight);
+
+                    });
+                    LineChartForWeightGirls(age, weight);
+
+                }
+            })
+        }
+    function LineChartForWeightGirls(age, weight) {
+
+
+            Highcharts.chart('ch-girls-weight', {
+
+                title: {
+                    text: 'Weight-for-Age Girls',
+                     style: {color:'#f405b6',font: 'bold 16px "Trebuchet MS", Verdana, sans-serif'}
+                },
+           
+                subtitle: {
+                    text: '2 to 5 years Percentiles '
+                },
+
+                yAxis: {
+                    title: {
+                        text: 'Weight (Kg)'
+                    }
+                },
+
+                xAxis: {
+
+                    categories: ['1 year', '2 years', '3 years', '4 years', '5 years'],
+                    min: 0,
+                    max: 4,
+                    labels: {
+                        step: 1
+                    },
+
+                    title: {
+                        text: 'Age (years)'
+                    },
+                    accessibility: {
+                        rangeDescription: 'Range: 1 to 5 years',
+                        //tickInterval: 5
+                    }
+                },
+
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                plotOptions: {
+
+                    series: {
+                         labels: {
+                            connectorAllowed: false
+                        },
+                        //pointStart: 0
+                    }
+                },
+
+                series: [{
+                    name: 'Age',
+                    data: age
+                }, {
+                    name: 'Weight',
+                    data: weight
+                }]
+
+            });
+        }
+
+    function drawChartForHeightGirls() {
+
+     var url = "@Url.Action("GetFemaleHeight", "GrowthChart", new { area = "PN" })"
+
+            $.ajax({
+                url: url,
+                type: "get",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (response) {
+                   
+                    let age = [], height = [];
+                    $.each(response, function (i, x) {
+                        age.push(x.Age);
+                        height.push(parseInt(x.HC));
+
+                    });
+                    LineChartForHeightGirls(age, height);
+
+                }
+            })
+        }
+    function LineChartForHeightGirls(age, height) {
+            Highcharts.chart('ch-girls-height', {
+               
+                title: {
+                    text: 'Height-for-Age Girls',
+                    style: {color:'#f405b6',font: 'bold 16px "Trebuchet MS", Verdana, sans-serif'}
+                },
+            
+                subtitle: {
+                    text: '2 to 5 years Percentiles '
+                },
+                yAxis: {
+
+                    title: {
+                        text: 'Height (cm)'
+                    }
+                },
+                xAxis: {
+
+                    categories: ['1 year', '2 years', '3 years', '4 years', '5 years'],
+                    min: 0,
+                    max: 4,
+                    labels: {
+                        step: 1
+                    },
+
+                    title: {
+                        text: 'Age (years)'
+                    },
+                    accessibility: {
+                        rangeDescription: 'Range: 1 to 5 years',
+                        tickInterval:5
+                    }
+                },
+
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                plotOptions: {
+
+                    series: {
+                         label: {
+                            connectorAllowed: false
+                        },
+                        //pointStart: 0
+                    }
+                },
+
+                series: [{
+                    name: 'Age',
+                    data: age
+                }, {
+                    name: 'Height',
+                    data: height
+                }],
+                responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                        }
+                    }
+                }]
+            }
+       });
+        }
+
+
+   function drawChartForLengthBoys() {
+
+     var url = "@Url.Action("GetMaleLength", "GrowthChart", new { area = "PN" })"
+
+            $.ajax({
+                url: url,
+                type: "get",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (response) {
+                     console.log(response);
+                    let age = [], length = [];
+                    $.each(response, function (i, x) {
+                        age.push(x.Age);
+                        length.push(parseInt(x.Length));
+
+                    });
+                    LineChartForLengthBoys(age, length);
+
+                }
+            })
+        }
+   function LineChartForLengthBoys(age, length) {
+            Highcharts.chart('ch-boys-Length', {
+               
+                title: {
+                    text: 'Length-for-Age Boys',
+                    style: {color:'#1c84c6',font: 'bold 16px "Trebuchet MS", Verdana, sans-serif'}
+                },
+            
+                subtitle: {
+                    text: 'Birth to 2 years Percentiles '
+                },
+                yAxis: {
+
+                    title: {
+                        text: 'Length (cm)'
+                    }
+                },
+                xAxis: {
+
+                    categories: ['Birth', '1 years', '2 years'],
+                    min: 0,
+                    max: 2,
+                    labels: {
+                        step: 1
+                    },
+
+                    title: {
+                        text: 'Age (years)'
+                    },
+                    accessibility: {
+                        rangeDescription: 'Range: 1 to 5 years',
+                        tickInterval:5
+                    }
+                },
+
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                plotOptions: {
+
+                    series: {
+                         label: {
+                            connectorAllowed: false
+                        },
+                        //pointStart: 0
+                    }
+                },
+
+                series: [{
+                    name: 'Age',
+                    data: age
+                }, {
+                    name: 'Length',
+                    data: length
+                }],
+                responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                        }
+                    }
+                }]
+            }
+       });
+        }
+
+   function drawChartForLengthGirls() {
+
+     var url = "@Url.Action("GetFemaleLength", "GrowthChart", new { area = "PN" })"
+
+            $.ajax({
+                url: url,
+                type: "get",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (response) {
+                     console.log(response);
+                    let age = [], length = [];
+                    $.each(response, function (i, x) {
+                        age.push(x.Age);
+                        length.push(parseInt(x.Length));
+
+                    });
+                    LineChartForLengthGirls(age, length);
+
+                }
+            })
+        }
+   function LineChartForLengthGirls(age, length) {
+            Highcharts.chart('ch-girls-Length', {
+               
+                title: {
+                    text: 'Length-for-Age Girls',
+                    style: {color:'#f405b6',font: 'bold 16px "Trebuchet MS", Verdana, sans-serif'}
+                },
+            
+                subtitle: {
+                    text: 'Birth to 2 years Percentiles '
+                },
+                yAxis: {
+
+                    title: {
+                        text: 'Length (cm)'
+                    }
+                },
+                xAxis: {
+
+                    categories: ['Birth', '1 years', '2 years'],
+                    min: 0,
+                    max: 2,
+                    labels: {
+                        step: 1
+                    },
+
+                    title: {
+                        text: 'Age (years)'
+                    },
+                    accessibility: {
+                        rangeDescription: 'Range: 1 to 5 years',
+                        tickInterval:5
+                    }
+                },
+
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                plotOptions: {
+
+                    series: {
+                         label: {
+                            connectorAllowed: false
+                        },
+                        //pointStart: 0
+                    }
+                },
+
+                series: [{
+                    name: 'Age',
+                    data: age
+                }, {
+                    name: 'Length',
+                    data: length
+                }],
+                responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                        }
+                    }
+                }]
+            }
+       });
+ }
+    </script>
+}

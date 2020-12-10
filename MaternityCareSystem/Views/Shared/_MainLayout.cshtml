@@ -1,0 +1,244 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HMS</title>
+
+    <link href="@Url.Content("~/Content/css/bootstrap.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/fonts/font-awesome/css/font-awesome.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/fontawesome/css/all.min.css")" rel="stylesheet" />
+
+    <link href="@Url.Content("~/Content/css/animate.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/css/style.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Scripts/js/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Scripts/js/plugins/select2/select2.min.css")" rel="stylesheet" />
+    <script src="@Url.Content("~/Scripts/jquery-3.4.1.min.js")"></script>
+</head>
+@using Microsoft.AspNet.Identity
+<body>
+    <div id="wrapper">
+
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="sidebar-collapse">
+                @if (User.Identity.IsAuthenticated)
+                {
+
+                    <ul class="nav metismenu" id="side-menu">
+                        <li>
+                            <a href="@Url.Action("Index", "Home")"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboard</span></a>
+                        </li>
+
+                        @if (User.IsInRole("Receptionist"))
+                        {
+
+                            <li>
+                                <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Registration</span><span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li><a href="@Url.Action("Create", "Patient", new { area = "PN" })">Registration Form</a></li>
+                                    <li><a href="@Url.Action("Index", "Spec", new { area = "PN" })">Specialization</a></li>
+                                    <li><a href="@Url.Action("Index", "Doctor", new { area = "PN" })">Doctors</a></li>
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+
+
+                            <li>
+                                <a href="#"><i class="fa fa-user"></i> <span class="nav-label">User Management</span><span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li><a href="@Url.Action("Index", "Roles", new { area = "PN" })">Users</a></li>
+                                    <li><a href="@Url.Action("Register", "Account")">Register User</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Registration</span><span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li><a href="@Url.Action("Create", "Patient", new { area = "PN" })">Registration Form</a></li>
+                                    @*<li><a href="@Url.Action("Index", "Spec", new { area = "PN" })">Specialization</a></li>
+                                    <li><a href="@Url.Action("Index", "Doctor", new { area = "PN" })">Doctors</a></li>*@
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-female fa-2x"></i> <span class="nav-label">Pre-Natal</span><span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    @*<li><a href="@Url.Action("Create", "StepOne", new { area = "PN" })">Pre-Natal Step 1</a></li>
+                                    <li><a href="@Url.Action("Create", "StepTwo", new { area = "PN" })">Pre-Natal Step 2</a></li>*@
+                                    <li><a href="@Url.Action("PhysicalExamTab", "PreNatalPhyExamination", new { area = "PN" })">Pre-Natal Examination</a></li>
+                                    <li><a href="@Url.Action("VisitSummary", "GrowthChart", new { area = "PN" })">Visit Summary</a></li>
+                                    @*<li><a href="@Url.Action("PrenataPhysicalExamination", "PreNatalPhyExamination", new { area = "PN" })">Pre-Natal Examination Detail</a></li>*@
+                                    @*<li><a href="@Url.Action("Create", "PreNatalPhyExamination", new { area = "PN" })">Pre-Natal Physical Examination</a></li>
+        <li><a href="@Url.Action("Create", "PhysicalExamination", new { area = "PN" })">Physical Examination</a></li>
+        <li><a href="@Url.Action("Create", "LabTest", new { area = "PN" })">Lab Test</a></li>
+        <li><a href="@Url.Action("Create", "Medication", new { area = "PN" })">Medication</a></li>
+        <li><a href="@Url.Action("Create", "Councel", new { area = "PN" })">Councel</a></li>*@
+
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="#"><i class="fa fa-child fa-2x"></i> <span class="nav-label">Post-Natal</span><span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li><a href="@Url.Action("Create", "Infant", new { area = "PN" })">Infant Checkup</a></li>
+                                    @*<li><a href="@Url.Action("Create", "PostNatalMotherPhyExamination", new { area = "PN" })">Mother Checkup</a></li>*@
+                                    <li><a href="@Url.Action("MotherCheckupTab", "PostNatalMotherPhyExamination", new { area = "PN" })">Mother Checkup</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-female fa-2x"></i> <span class="nav-label">Gynae</span><span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    @*<li><a href="@Url.Action("Create", "Gynae", new { area = "PN" })">Gynae Form</a></li>*@
+                                    @*<li><a href="@Url.Action("Create", "GynaePhyExamination", new { area = "PN" })">Gynae Physical</a></li>*@
+                                    <li><a href="@Url.Action("GeneralTab", "GynaePhyExamination", new { area = "PN" })">Gynae Examination</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-child fa-2x"></i> <span class="nav-label">Paeds</span><span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse">
+
+                                    @*<li><a href="@Url.Action("Create", "Paeds", new { area = "PN" })">Paeds Form</a></li>*@
+                                    @*<li><a href="@Url.Action("Create", "PaedsPhyExamination", new { area = "PN" })">Paeds Physical</a></li>*@
+                                    <li><a href="@Url.Action("GeneralTab", "PaedsPhyExamination", new { area = "PN" })">Paeds Examination</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Create", "Ultrasound", new { area = "PN" })"><i class="fa fa-book-open"></i> <span class="nav-label">Ultrasound</span></a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Charts", "GrowthChart", new { area = "PN" })"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Growth Charts</span></a>
+                            </li>
+                        }
+                    </ul>
+
+                }
+
+            </div>
+        </nav>
+        <div id="page-wrapper" class="gray-bg">
+            <div class="row border-bottom">
+                <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+                    <div class="navbar-header">
+                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                    </div>
+                    <ul class="nav navbar-top-links navbar-right">
+                        @if (Request.IsAuthenticated)
+                        {
+                            <li>
+                                <span class="m-r-sm text-muted welcome-message"></span>
+                            </li>
+                        }
+
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutFrm", @class = "navbar-right" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <li>
+                                    <a style="color:#999c9e" class="dropdown-item" href="javascript:void(0)">
+                                        <span class="m-r-sm text-muted welcome-message">Welcome!</span>@User.Identity.GetUserName()
+                                    </a>
+                                </li>
+                                <li>
+                                    <a style="color:#999c9e" class="dropdown-item" href="javascript:document.getElementById('logoutFrm').submit()">
+                                        <i class="fa fa-sign-out"></i>Logout
+                                    </a>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li>
+                                <a href="@Url.Action("Login","Account")">
+                                    <i class="fa fa-sign-in"></i>Login
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </nav>
+            </div>
+            <div class="wrapper wrapper-content">
+                @RenderBody()
+            </div>
+            <div class="footer">
+                <div class="float-right">
+                    Developed By: <strong>KPITB Support Team </strong>@DateTime.Now.Year
+                </div>
+                <div>
+                    <strong>Copyright</strong> KPITB &copy; @DateTime.Now.Year
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Mainly scripts -->
+
+    <script src="@Url.Content("~/Scripts/js/popper.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/js/bootstrap.js")"></script>
+    <script src="@Url.Content("~/Scripts/js/plugins/metisMenu/jquery.metisMenu.js")"></script>
+    <script src="@Url.Content("~/Scripts/js/plugins/slimscroll/jquery.slimscroll.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/js/hightCharts/highcharts.js")"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="@Url.Content("~/Scripts/js/inspinia.js")"></script>
+    <script src="@Url.Content("~/Scripts/js/plugins/pace/pace.min.js")"></script>
+
+    <!-- App Scripts -->
+    <script src="@Url.Content("~/Scripts/js/plugins/blockui/jquery.blockUI.js")"></script>
+    <script src="@Url.Content("~/Scripts/js/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/js/plugins/sweetalert/sweetalert2@9.js")"></script>
+    <script src="@Url.Content("~/Scripts/js/plugins/select2/select2.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/CommonScript.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
+
+    <!-- Peity -->
+    @*<script src="~/Scripts/js/plugins/peity/jquery.peity.min.js"></script>
+        <script src="~/Scripts/js/demo/peity-demo.js"></script>*@
+
+    <!-- jQuery UI -->
+    @*<script src="~/Scripts/js/plugins/jquery-ui/jquery-ui.min.js"></script>*@
+
+    <!-- Jvectormap -->
+    @*<script src="~/Scripts/js/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
+        <script src="~/Scripts/js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>*@
+
+    <!-- EayPIE -->
+    @*<script src="~/Scripts/js/plugins/easypiechart/jquery.easypiechart.js"></script>*@
+
+    <!-- Sparkline -->
+    @*<script src="~/Scripts/js/plugins/sparkline/jquery.sparkline.min.js"></script>*@
+
+    <!-- Sparkline demo data  -->
+    @*<script src="~/Scripts/js/demo/sparkline-demo.js"></script>*@
+
+
+
+    @RenderSection("scripts", required: false)
+    <script>
+        $(function () {
+            setNavigation();
+        });
+        function setNavigation() {
+            var path = window.location.pathname;
+            //path = path[0] == '/' ? path.substr(1) : path; //it will remove the dash in the URL
+
+            $("ul.metismenu a").each(function () {
+                var href = $(this).attr('href');
+                if (path.substring(0, href.length) === href) {
+                    $(this).closest('li').addClass('active');
+                }
+            });
+            $("ul.metismenu .nav-second-level a").each(function () {
+                var href = $(this).attr('href');
+                if (path.substring(0, href.length) === href) {
+                    $(this).parent().parent().closest('li').addClass('active');
+                    $(this).closest('ul').addClass('in');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

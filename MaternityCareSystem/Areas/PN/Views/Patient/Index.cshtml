@@ -1,0 +1,160 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@model MaternityCareSystem.Areas.PN.DataModels.PatientInfoPaging
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="col-md-12">
+    <div class="ibox-content">
+        <div class="ibox-title"><h5>Patients</h5></div>
+        <div class="row">
+            <div class="col-md-4">
+                <a class="btn btn-w-m btn-primary" href="@Url.Action("Create")"><i class="fa fa-plus"></i> Add New Patient</a>
+            </div>
+            <div class="col-md-4 offset-4 float-right">
+                @using (Html.BeginForm("Index", "Patient", new { area = "PN" }, FormMethod.Get))
+                {
+                    <div class="input-group">
+                        <input type="text" id="mrNo" name="mrNo" placeholder="MR Number" class="form-control">
+                        <span class="input-group-append">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-search"></i> Search
+                            </button>
+                        </span>
+                    </div>
+                }
+            </div>
+        </div>
+        <table id="tbl-patient" class="table table-bordered mt-1">
+            <thead>
+                <tr>
+                    <th>
+                        Mr Number
+                    </th>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        DOB
+                    </th>
+                    <th>
+                        Age
+                    </th>
+                    <th>
+                        Guardian Relation
+                    </th>
+                    <th>
+                        Gender
+                    </th>
+                    <th>
+                        Contact Number
+                    </th>
+                    <th>
+                        CNIC
+                    </th>
+                    <th>
+                        Address
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Patients)
+                {
+                    <tr>
+
+                        <td>
+                            @item.MrNumber
+                        </td>
+                        <td>
+                            @item.PatientName
+                        </td>
+                        <td>
+                            @Html.DisplayFor(x => item.DOB)
+                        </td>
+                        <td>
+                            @item.PatientAge
+                        </td>
+                        <td>
+                            @item.GuardianRelation
+                        </td>
+                        <td>
+                            @item.Gender
+                        </td>
+                        <td>
+                            @item.ContactNumber
+                        </td>
+                        <td>
+                            @item.CNIC
+                        </td>
+                        <td>
+                            @item.Address
+                        </td>
+                        <td>
+                            <a class="btn btn-primary btn-sm" href="@Url.Action("Edit", new { id = item.PatientId })">Edit</a>
+                            <a class="btn btn-danger btn-sm text-white" data-patientid="@item.PatientId" onclick="deletePatient(this)">Remove</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @Html.Pager(Model.TotalRecords, Model.PageSize, Model.PageNo,
+            new PagerOptions
+            {
+                PageIndexParameterName = "id",
+                CssClass = "pagination",
+                ContainerTagName = "ul",
+                CurrentPagerItemTemplate = "<li class=\"paginate_button page-item active\"><a class=\"page-link\" href='#'>{0}</a></li>",
+                DisabledPagerItemTemplate = "<li class=\"paginate_button page-item disabled\"><a class=\"page-link\">{0}</a></li>",
+                PagerItemTemplate = "<li class=\"paginate_button page-item\">{0}</li>"
+
+            })
+    </div>
+
+</div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            $('.page-item').each(function () {
+                var an = $(this).find('a');
+                if (!$(an).hasClass('page-link')) {
+                    $(an).addClass('page-link');
+                }
+            });
+
+
+            $("#txt-search-patient").keyup(function () {
+                searchTable("txt-search-patient", "tbl-patient");
+            });
+
+        });
+
+        function deletePatient(objRef) {
+
+            var patientid = $(objRef).data('patientid');
+            var tr = $(objRef).parent('td').parent('tr');
+            ngo.HTML.Confirm.Show({ message: "Do you want to delete", title: "warning", type: "warning" }, function () {
+                $.ajax({
+                    url: "/PN/Patient/DeletePatient",
+                    contentType: "application/json",
+                    dataType: "Json",
+                    data: "{patientid:'" + patientid + "'}",
+                    type: "Post",
+                    success: function (data) {
+                        if (!data.result.Error) {
+                            ngo.HTML.Alert.Show({ message: "Record deleted successfully", title: "success", type: "success" });
+                            $(tr).fadeOut(500);
+                        }
+                    }
+                });
+            });
+        }
+
+
+    </script>
+}

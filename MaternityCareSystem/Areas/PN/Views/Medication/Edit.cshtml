@@ -1,0 +1,120 @@
+﻿@model MaternityCareSystem.Areas.PN.DataModels.PreNatal_Medication
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m=>m.PreNatalMedicationId)
+    <div class="ibox">
+        <div class="ibox-title"><h5>Edit Medication</h5></div>
+
+        <div class="ibox-content">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <lable class="control-label col-md-2">Patient Name</lable>
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.PatientId, null, htmlAttributes: new { @class = "form-control select2" })
+                            @Html.ValidationMessageFor(model => model.PatientId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <lable class="control-label col-md-2">Visit</lable>
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.VisitNo, null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.VisitNo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <lable class="control-label col-md-2">Checkup-Of</lable>
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.CheckupOf, null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CheckupOf, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <div class="form-check">
+                                @Html.CheckBoxFor(model => model.PreNatalVitamins, htmlAttributes: new { @class = "form-check-input" })
+                                <label class="form-check-label" for="PreNatalVitamins">Pre-Natal Vitamins</label>
+                                @Html.ValidationMessageFor(model => model.PreNatalVitamins, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <div class="form-check">
+                                @Html.CheckBoxFor(model => model.TT, htmlAttributes: new { @class = "form-check-input" })
+                                <label class="form-check-label" for="TT">TT</label>
+                                @Html.ValidationMessageFor(model => model.TT, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <div class="form-check">
+                                @Html.CheckBoxFor(model => model.Calcium, htmlAttributes: new { @class = "form-check-input" })
+                                <label class="form-check-label" for="Calcium">Calcium</label>
+                                @Html.ValidationMessageFor(model => model.Calcium, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <div class="form-check">
+                                @Html.CheckBoxFor(model => model.HepBVaccine, htmlAttributes: new { @class = "form-check-input" })
+                                <label class="form-check-label" for="HepBVaccine">HepB Vaccine</label>
+                                @Html.ValidationMessageFor(model => model.HepBVaccine, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <div class="form-check">
+                                @Html.CheckBoxFor(model => model.ReviewDangerSigns, htmlAttributes: new { @class = "form-check-input" })
+                                <label class="form-check-label" for="ReviewDangerSigns">Review Danger Signs</label>
+                                @Html.ValidationMessageFor(model => model.ReviewDangerSigns, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Advice, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.Advice, 2, 66, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Advice, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="offset-10 col-md-2">
+                    <button class="btn btn-sm btn-primary" type="submit"><strong>Update</strong></button>
+                    <a class="btn btn-sm btn-danger" href="@Url.Action("Index")"><strong>Cancel</strong></a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

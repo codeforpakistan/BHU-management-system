@@ -1,0 +1,346 @@
+﻿@model MaternityCareSystem.Areas.PN.DataModels.GynaeForm
+@{
+    ViewBag.Title = "GeneralTab";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<link href="~/Content/css/plugins/steps/jquery.steps.css" rel="stylesheet" />
+<script src="~/Scripts/js/plugins/steps/jquery.steps.min.js"></script>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Gynae Form</h5>
+                <div class="ibox-tools">
+
+
+                </div>
+            </div>
+            <div class="ibox-content">
+
+                <div class="row" hidden>
+                    @*<div class="col-md-3">
+                            <div class="form-group">
+                                @Html.TextBox("MotherName", null, htmlAttributes: new { @class = "form-control", @placeholder = "Mother Name" })
+                            </div>
+                        </div>*@
+
+                    <div class="col-md-4 offset-8">
+
+                        @using (Html.BeginForm("", "", new { area = "PN" }, FormMethod.Get))
+                        {
+                            <div class="input-group">
+                                <input type="text" id="MrNumber" name="MrNumber" required="required" placeholder="MR Number" class="form-control">
+                                <span class="input-group-append">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fa fa-search"></i> Search
+                                    </button>
+                                </span>
+                            </div>
+
+                        }
+                    </div>
+
+                </div>
+
+                @using (Html.BeginForm("GeneralTab", "GynaePhyExamination", new { Area = "PN" }, FormMethod.Post, htmlAttributes: new
+                {
+                    @class = "wizard-big wizard clearfix"
+                }))
+                {
+                    <div class="steps clearfix mt-1">
+                        <ul role="tablist">
+                            <li role="tab" class="first current" aria-disabled="false" aria-selected="true">
+                                <a id="form-t-0" href="#form-h-0" aria-controls="form-p-0">
+                                    <span class="current-info audible">current step: </span>
+                                    <span class="number">1.</span>General
+                                </a>
+                            </li>
+                            <li role="tab" class="disabled" aria-disabled="true">
+                                <a id="form-t-1" href="#form-h-1" aria-controls="form-p-1">
+                                    <span class="number">2.</span> Mother Physical Examination
+                                </a>
+                            </li>
+                            <li role="tab" class="disabled" aria-disabled="true">
+                                <a id="form-t-2" href="#form-h-2" aria-controls="form-p-2">
+                                    <span class="number">3.</span> Lab Test
+                                </a>
+                            </li>
+                            <li role="tab" class="disabled" aria-disabled="true">
+                                <a id="form-t-3" href="#form-h-3" aria-controls="form-p-3">
+                                    <span class="number">4.</span> Assessemnt
+                                </a>
+                            </li>
+                            <li role="tab" class="disabled" aria-disabled="true">
+                                <a id="form-t-4" href="#form-h-4" aria-controls="form-p-4">
+                                    <span class="number">5.</span> Medication
+                                </a>
+                            </li>
+                            <li role="tab" class="disabled last" aria-disabled="true">
+                                <a id="form-t-5" href="#form-h-5" aria-controls="form-p-5">
+                                    <span class="number">6.</span> Plan
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="content clearfix">
+                        <h1 id="form-h-0" tabindex="-1" class="title current">General</h1>
+
+                        <fieldset>
+                            <div class="form-row">
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <label class="col-form-label col-md-6">Patient Name</label>
+                                        <div class="col-md-6">
+                                            @Html.DropDownListFor(model => model.PatientId, null,"", htmlAttributes: new { @class = "form-control form-control-sm select2" })
+                                            @Html.ValidationMessageFor(model => model.PatientId, "", new { @class = "text-danger" })
+                                        </div>
+                                        <label class="col-form-label col-md-6">Enter first Date of Last Menstrual Period</label>
+                                        <div class="col-md-6">
+                                            @Html.EditorFor(model => model.LastMenstrualDate, new { htmlAttributes = new { @class = "form-control form-control-sm datepicker" } })
+                                            @Html.ValidationMessageFor(model => model.LastMenstrualDate, "", new { @class = "text-danger" })
+                                        </div>
+                                        <label class="col-form-label col-md-3">History</label>
+                                        <div class="col-md-9">
+                                            @Html.TextAreaFor(model => model.History, 4, 97, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                            @Html.ValidationMessageFor(model => model.History, "", new { @class = "text-danger" })
+                                        </div>
+                                        <label class="col-form-label col-md-6">Last Menstrual Period Begin</label>
+                                        <div class="col-md-6">
+                                            @Html.EditorFor(model => model.LastMenstrualBegin, new { htmlAttributes = new { @class = "form-control form-control-sm datepicker" } })
+                                            @Html.ValidationMessageFor(model => model.LastMenstrualBegin, "", new { @class = "text-danger" })
+                                        </div>
+                                        <label class="col-form-label col-md-6">Last Menstrual Period End</label>
+                                        <div class="col-md-6">
+                                            @Html.EditorFor(model => model.LastMenstrualEnd, new { htmlAttributes = new { @class = "form-control form-control-sm datepicker" } })
+                                            @Html.ValidationMessageFor(model => model.LastMenstrualEnd, "", new { @class = "text-danger" })
+                                        </div>
+
+                                        <label class="col-form-label col-md-6">Number Of Days Bleeding</label>
+                                        <div class="checkbox col-md-6">
+                                            @Html.CheckBoxFor(model => model.NumberOfDaysBleeding, htmlAttributes: new { @class = " " })
+                                            @Html.ValidationMessageFor(model => model.NumberOfDaysBleeding, "", new { @class = "text-danger" })
+                                        </div>
+                                        <label class="col-form-label col-md-6">if yes Days</label>
+                                        <div class="col-md-3">
+                                            @Html.EditorFor(model => model.Dayss, new { htmlAttributes = new { @class = "form-control form-control form-control-sm" } })
+                                            @Html.ValidationMessageFor(model => model.Dayss, "", new { @class = "text-danger" })
+                                        </div>
+                                        <label class="col-form-label col-md-6">Heavy/Light</label>
+                                        <div class="checkbox col-md-6">
+                                            @Html.CheckBoxFor(model => model.BleedingCondition, htmlAttributes: new { @class = " " })
+                                            @Html.ValidationMessageFor(model => model.BleedingCondition, "", new { @class = "text-danger" })
+                                        </div>
+                                        <label class="col-form-label col-md-6">Pain</label>
+                                        <div class="checkbox col-md-6">
+                                            @Html.CheckBoxFor(model => model.Pain, htmlAttributes: new { @class = " " })
+                                            @Html.ValidationMessageFor(model => model.Pain, "", new { @class = "text-danger" })
+                                        </div>
+                                        <label class="col-form-label col-md-3">If yes Define</label>
+                                        <div class="col-md-9">
+                                            @Html.TextAreaFor(model => model.PainNotes, 2, 97, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.PainNotes, "", new { @class = "text-danger" })
+                                        </div>
+
+                                        <label class="col-form-label col-md-3">Cycle History</label>
+                                        <div class="col-md-9">
+                                            @Html.TextAreaFor(model => model.CycleHistory, 2, 97, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.CycleHistory, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="panel panel-warning">
+                                        <div class="panel-heading">
+                                            Complaints
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="col-md-10">
+                                                            <div class="form-check">
+                                                                @Html.CheckBoxFor(model => model.ComplaintPain, htmlAttributes: new { @class = "form-check-input" })
+                                                                <label class="form-check-label" for="ComplaintPain">Pain</label>
+                                                                @Html.ValidationMessageFor(model => model.ComplaintPain, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <div class="col-md-10">
+                                                            <div class="form-check">
+                                                                @Html.CheckBoxFor(model => model.ComplaintBleeding, htmlAttributes: new { @class = "form-check-input" })
+                                                                <label class="form-check-label" for="ComplaintBleeding">Bleeding</label>
+                                                                @Html.ValidationMessageFor(model => model.ComplaintBleeding, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-md-10">
+                                                            <div class="form-check">
+                                                                @Html.CheckBoxFor(model => model.ComplaintDischarge, htmlAttributes: new { @class = "form-check-input" })
+                                                                <label class="form-check-label" for="ComplaintDischarge">Discharge</label>
+                                                                @Html.ValidationMessageFor(model => model.ComplaintDischarge, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-md-10">
+                                                            <div class="form-check">
+                                                                @Html.CheckBoxFor(model => model.ComplaintUrineBurning, htmlAttributes: new { @class = "form-check-input" })
+                                                                <label class="form-check-label" for="ComplaintUrineBurning">Urine Burning</label>
+                                                                @Html.ValidationMessageFor(model => model.ComplaintUrineBurning, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-md-10">
+                                                            <div class="form-check">
+                                                                @Html.CheckBoxFor(model => model.ComplaintSeizures, htmlAttributes: new { @class = "form-check-input" })
+                                                                <label class="form-check-label" for="ComplaintSeizures">Seizures</label>
+                                                                @Html.ValidationMessageFor(model => model.ComplaintSeizures, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-md-10">
+                                                            <div class="form-check">
+                                                                @Html.CheckBoxFor(model => model.ComplaintFits, htmlAttributes: new { @class = "form-check-input" })
+                                                                <label class="form-check-label" for="ComplaintFits">Fits</label>
+                                                                @Html.ValidationMessageFor(model => model.ComplaintFits, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <label class="col-form-label col-md-2">Para</label>
+                                        <div class="col-md-2">
+                                            @Html.EditorFor(model => model.Para, new { htmlAttributes = new { @class = "form-control form-control form-control-sm numbers" } })
+                                            @Html.ValidationMessageFor(model => model.Para, "", new { @class = "text-danger" })
+                                        </div>
+
+                                        <label class="col-form-label col-md-1">Gravida</label>
+                                        <div class="col-md-2">
+                                            @Html.EditorFor(model => model.Gravida, new { htmlAttributes = new { @class = "form-control form-control form-control-sm numbers" } })
+                                            @Html.ValidationMessageFor(model => model.Gravida, "", new { @class = "text-danger" })
+                                        </div>
+                                        <label class="col-form-label col-md-1">Abortions</label>
+                                        <div class="col-md-2">
+                                            @Html.EditorFor(model => model.Abortions, new { htmlAttributes = new { @class = "form-control form-control form-control-sm" } })
+                                            @Html.ValidationMessageFor(model => model.Abortions, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="col-md-1"></div>
+                                        <label class="col-form-label col-md-2">Last Baby Born</label>
+                                        <div class="col-md-2">
+                                            @Html.EditorFor(model => model.LastBabyBorn, new { htmlAttributes = new { @class = "form-control form-control form-control-sm" } })
+                                            @Html.ValidationMessageFor(model => model.LastBabyBorn, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <label class="col-form-label col-md-3">Infertility</label>
+                                        <div class="checkbox col-md-9">
+                                            @Html.CheckBoxFor(model => model.Infertility, htmlAttributes: new { @class = " " })
+                                            @Html.ValidationMessageFor(model => model.Infertility, "", new { @class = "text-danger" })
+                                        </div>
+                                        <label class="col-form-label col-md-3">Married Years (How many years)</label>
+                                        <div class="col-md-3">
+                                            @Html.EditorFor(model => model.MarriedYears, new { htmlAttributes = new { @class = "form-control form-control form-control-sm" } })
+                                            @Html.ValidationMessageFor(model => model.MarriedYears, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="col-md-6"></div>
+                                        <label class="col-form-label col-md-3">Husband</label>
+                                        <div class="col-md-9">
+                                            @Html.TextAreaFor(model => model.Husband, 2, 97, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Husband, "", new { @class = "text-danger" })
+                                        </div>
+
+                                        <label class="col-form-label col-md-3">History And Tests(Wife)</label>
+                                        <div class="col-md-9">
+                                            @Html.TextAreaFor(model => model.HistoryAndTestsWife, 2, 97, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.HistoryAndTestsWife, "", new { @class = "text-danger" })
+                                        </div>
+
+                                        <label class="col-form-label col-md-3">Other Medical History</label>
+                                        <div class="col-md-9">
+                                            @Html.TextAreaFor(model => model.OtherMedicalHistory, 2, 97, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.OtherMedicalHistory, "", new { @class = "text-danger" })
+                                        </div>
+
+                                        <label class="col-form-label col-md-3">Current Medication</label>
+                                        <div class="col-md-9">
+                                            @Html.TextAreaFor(model => model.CurrentMedication, 2, 97, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.CurrentMedication, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <h1 id="form-h-1" tabindex="-1" class="title disabled">Mother Physical Examination</h1>
+                        <fieldset id="form-p-1" role="tabpanel" aria-labelledby="form-h-1" class="body" aria-hidden="true" style="display: none;">
+                        </fieldset>
+
+                        <h1 id="form-h-2" tabindex="-1" class="title disabled">Lab Test</h1>
+                        <fieldset id="form-p-2" role="tabpanel" aria-labelledby="form-h-2" class="body" aria-hidden="true" style="display: none;">
+                        </fieldset>
+
+                        <h1 id="form-h-3" tabindex="-1" class="title disabled">Assessment</h1>
+                        <fieldset id="form-p-3" role="tabpanel" aria-labelledby="form-h-3" class="body" aria-hidden="true" style="display: none;">
+                        </fieldset>
+
+                        <h1 id="form-h-4" tabindex="-1" class="title disabled">Medication</h1>
+                        <fieldset id="form-p-4" role="tabpanel" aria-labelledby="form-h-4" class="body" aria-hidden="true" style="display: none;">
+                        </fieldset>
+                        <h1 id="form-h-5" tabindex="-1" class="title disabled">Plan</h1>
+                        <fieldset id="form-p-5" role="tabpanel" aria-labelledby="form-h-4" class="body" aria-hidden="true" style="display: none;">
+                        </fieldset>
+                    </div>
+                    <div class="actions clearfix">
+                        <ul role="menu" aria-label="Pagination">
+                            @*<li class="" aria-disabled="false">
+                                    <a href="@Url.Action("GetDetails","PhysicalExamination",new {id=Model.PatientId })" role="menuitem">Previous</a>
+                                </li>*@
+                            <li aria-hidden="false" aria-disabled="false"><button id="btn-save-physical" type="submit" class="btn btn-primary btn-block">Next</button></li>
+                            @*<li aria-hidden="true" style="display: none;"><a href="#finish" role="menuitem">Finish</a></li>*@
+                        </ul>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(function () {
+            $("#LastBabyBorn").datepicker({
+                format: "yyyy",
+                viewMode: "years",
+                minViewMode: "years",
+                autoclose: true,
+                orientation: 'bottom',
+                todayHighlight: true
+
+            });
+        });
+    </script>
+}
+

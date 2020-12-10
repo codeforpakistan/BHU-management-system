@@ -1,0 +1,119 @@
+﻿@model MaternityCareSystem.Areas.PN.DataModels.PatientInfo
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="ibox ">
+    <div class="ibox-title"><h5>Add Patient</h5></div>
+    @using (Ajax.BeginForm("Create", "Patient", new { area = "PN" }, new AjaxOptions() { HttpMethod = "Post", OnBegin = "begin", OnSuccess = "success" }))
+    {
+        @Html.AntiForgeryToken()
+
+<div class="ibox-content">
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-row">
+                <label class="col-form-label col-md-6">Patient Name</label>
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.PatientName, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                    @Html.ValidationMessageFor(model => model.PatientName, "", new { @class = "text-danger" })
+                </div>
+                <label class="col-form-label col-md-6">Date of Birth</label>
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control form-control-sm datepicker" } })
+                    @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
+                </div>
+                <label class="col-form-label col-md-6">Patient Age</label>
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.PatientAge, new { htmlAttributes = new { @class = "form-control form-control-sm", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.PatientAge, "", new { @class = "text-danger" })
+                </div>
+
+                <label class="col-form-label col-md-6">Guardian Relation</label>
+                <div class="col-md-6">
+                    @Html.DropDownListFor(model => model.GuardianRelation, null, htmlAttributes: new { @class = "form-control form-control-sm" })
+                    @Html.ValidationMessageFor(model => model.GuardianRelation, "", new { @class = "text-danger" })
+                </div>
+                <label class="col-form-label col-md-6">Gender</label>
+                <div class="col-md-6">
+                    @Html.DropDownListFor(model => model.Gender, null, htmlAttributes: new { @class = "form-control form-control-sm" })
+                    @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                </div>
+
+                <label class="col-form-label col-md-6">Contact Number</label>
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.ContactNumber, new { htmlAttributes = new { @class = "form-control form-control-sm", data_mask = "9999-9999999" } })
+                    @Html.ValidationMessageFor(model => model.ContactNumber, "", new { @class = "text-danger" })
+                </div>
+                <label class="col-form-label col-md-6">CNIC or Guardian CNIC</label>
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.CNIC, new { htmlAttributes = new { @class = "form-control form-control-sm", data_mask = "99999-9999999-9" } })
+                    @Html.ValidationMessageFor(model => model.CNIC, "", new { @class = "text-danger" })
+                </div>
+                <label class="col-form-label col-md-6">Address</label>
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+
+    <div class="form-group">
+        <div class="offset-10 col-md-2">
+            <button class="btn btn-sm btn-primary" type="submit"><strong>Save</strong></button>
+            <a class="btn btn-sm btn-danger" href="@Url.Action("Index")"><strong>Cancel</strong></a>
+        </div>
+    </div>
+</div>
+    }
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/js/plugins/jasny/jasny-bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $("#DOB").change(function () {
+
+                var today = new Date();
+                var birthDate = new Date($('#DOB').val());
+                var age = today.getFullYear() - birthDate.getFullYear();
+                var m = today.getMonth() - birthDate.getMonth();
+                if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                    age--;
+                }
+                return $('#PatientAge').val(age + ' years');
+            });
+
+
+
+        });
+
+        function begin() {
+            ngo.HTML.Loader.Show();
+        }
+
+        function success(response) {
+
+            if (!response.Error) {
+                ngo.HTML.Alert.Show({ title: response.Message, message: " ", type: "success" }, function () {
+                    //window.location = url;
+                    window.location = "/PN/Patient/Index";
+                });
+            }
+            else {
+                ngo.HTML.Alert.Show({ title: response.Message, message: " ", type: "error" });
+            }
+            ngo.HTML.Loader.Hide();
+        }
+        function complete() {
+            ngo.HTML.Loader.Hide();
+        }
+    </script>
+}

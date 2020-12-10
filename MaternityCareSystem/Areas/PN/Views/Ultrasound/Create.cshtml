@@ -1,0 +1,300 @@
+﻿@model MaternityCareSystem.Areas.PN.DataModels.Ultrasound
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+
+
+@using (Ajax.BeginForm("Create", "Ultrasound", new { area = "PN" }, new AjaxOptions() { HttpMethod = "Post", OnBegin = "begin", OnSuccess = "success" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="ibox">
+        <div class="ibox-title"><h5>Add Ultrasound</h5></div>
+        <div class="ibox-content">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-row">
+                        <label class="col-form-label col-md-2">Patient Name</label>
+                        <div class="col-md-3">
+                            @Html.DropDownListFor(model => model.PatientId, null, htmlAttributes: new { @class = "form-control form-control-sm select2" })
+                            @Html.ValidationMessageFor(model => model.PatientId, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-1">Date</label>
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control form-control-sm datepicker" } })
+                            @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-2">Last Menstrual Period</label>
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.LastMenstrualPeriod, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                            @Html.ValidationMessageFor(model => model.LastMenstrualPeriod, "", new { @class = "text-danger" })
+                        </div>
+
+                        <label class="col-form-label col-md-2">EDD</label>
+                        <div class="col-md-3">
+                            @Html.EditorFor(model => model.EDD, new { htmlAttributes = new { @class = "form-control form-control-sm datepicker" } })
+                            @Html.ValidationMessageFor(model => model.EDD, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-1">EGA</label>
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.EGA, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                            @Html.ValidationMessageFor(model => model.EGA, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-4"></div>
+
+                        <label class="col-form-label col-md-2">Placenta</label>
+                        <div class="col-md-2">
+                            @Html.DropDownListFor(model => model.Placenta, null, htmlAttributes: new { @class = "form-control form-control-sm " })
+                            @Html.ValidationMessageFor(model => model.Placenta, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-2">Grade</label>
+                        <div class="col-md-2">
+                            @Html.DropDownListFor(model => model.Grade, null, htmlAttributes: new { @class = "form-control form-control-sm" })
+                            @Html.ValidationMessageFor(model => model.Grade, "", new { @class = "text-danger" })
+                        </div>
+                        
+                        @*<label class="col-form-label col-md-2">Cord</label>
+                        <div class="col-md-2">
+                            @Html.DropDownListFor(model => model.Cord, null, htmlAttributes: new { @class = "form-control form-control-sm" })
+                            @Html.ValidationMessageFor(model => model.Cord, "", new { @class = "text-danger" })
+                        </div>*@
+                        <label class="col-form-label col-md-2">Amniotic Fluid Volume</label>
+                        <div class="col-md-2">
+                            @Html.DropDownListFor(model => model.AmnioticFluidVolume, null, htmlAttributes: new { @class = "form-control form-control-sm" })
+                            @Html.ValidationMessageFor(model => model.AmnioticFluidVolume, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-2">AFI</label>
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.AFI, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                            @Html.ValidationMessageFor(model => model.AFI, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-2">Gender</label>
+                        <div class="col-md-2">
+                            @Html.DropDownListFor(model => model.Gender, null, htmlAttributes: new { @class = "form-control form-control-sm" })
+                            @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-2">No Of Fetuses</label>
+                        <div class="col-md-2">
+                            @Html.DropDownListFor(model => model.NoOfFetuses, null, htmlAttributes: new { @class = "form-control form-control-sm" })
+                            @Html.ValidationMessageFor(model => model.NoOfFetuses, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-2">Position</label>
+                        <div class="col-md-2">
+                            @Html.DropDownListFor(model => model.Position, null, htmlAttributes: new { @class = "form-control form-control-sm" })
+                            @Html.ValidationMessageFor(model => model.Position, "", new { @class = "text-danger" })
+                        </div>
+                        @*<div class="col-md-3"></div>
+                        <label class="col-form-label col-md-2">Breathing</label>
+                        <div class="checkbox col-md-2">
+                            @Html.CheckBoxFor(model => model.Breathing, htmlAttributes: new { @class = " " })
+                            @Html.ValidationMessageFor(model => model.Breathing, "", new { @class = "text-danger" })
+                        </div>
+                        *@
+                        <label class="col-form-label col-md-2">Movement</label>
+                        <div class="checkbox col-md-2">
+                            @Html.CheckBoxFor(model => model.Movement, htmlAttributes: new { @class = " " })
+                            @Html.ValidationMessageFor(model => model.Movement, "", new { @class = "text-danger" })
+                        </div>
+                        
+                        <label class="col-form-label col-md-2">Face</label>
+                        <div class="col-md-2">
+                            @Html.DropDownListFor(model => model.Face, null, htmlAttributes: new { @class = "form-control form-control-sm" })
+                            @Html.ValidationMessageFor(model => model.Face, "", new { @class = "text-danger" })
+                        </div>
+                        @*<label class="col-form-label col-md-2">Brain</label>
+                        <div class="col-md-2">
+                            @Html.DropDownListFor(model => model.Brain, null, htmlAttributes: new { @class = "form-control form-control-sm" })
+                            @Html.ValidationMessageFor(model => model.Brain, "", new { @class = "text-danger" })
+                        </div>*@
+                        <label class="col-form-label col-md-2">Spine</label>
+                        <div class="col-md-2">
+                            @Html.DropDownListFor(model => model.Spine, null, htmlAttributes: new { @class = "form-control form-control-sm" })
+                            @Html.ValidationMessageFor(model => model.Spine, "", new { @class = "text-danger" })
+                        </div>
+                        @*<label class="col-form-label col-md-2">Lungs</label>
+                        <div class="col-md-2">
+                            @Html.DropDownListFor(model => model.Lungs, null, htmlAttributes: new { @class = "form-control form-control-sm" })
+                            @Html.ValidationMessageFor(model => model.Lungs, "", new { @class = "text-danger" })
+                        </div>*@
+                        <label class="col-form-label col-md-2">Heart:4 Chambers</label>
+                        <div class="checkbox col-md-2">
+                            @Html.CheckBoxFor(model => model.HeartChamber, htmlAttributes: new { @class = " " })
+                            @Html.ValidationMessageFor(model => model.HeartChamber, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-2">Heart</label>
+                        <div class="col-md-2">
+                            @Html.DropDownListFor(model => model.HeartCondition, null, htmlAttributes: new { @class = "form-control form-control-sm" })
+                            @Html.ValidationMessageFor(model => model.HeartCondition, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-2">Heart Rate</label>
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.HeartRate, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                            @Html.ValidationMessageFor(model => model.HeartRate, "", new { @class = "text-danger" })
+                        </div>
+
+
+                        <label class="col-form-label col-md-2">Stomach</label>
+                        <div class="col-md-2">
+                            @Html.DropDownListFor(model => model.Stomach, null, htmlAttributes: new { @class = "form-control form-control-sm" })
+                            @Html.ValidationMessageFor(model => model.Stomach, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-2">Cord Insertion</label>
+                        <div class="col-md-2">
+                            @Html.DropDownListFor(model => model.CordInsertion, null, htmlAttributes: new { @class = "form-control form-control-sm" })
+                            @Html.ValidationMessageFor(model => model.CordInsertion, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-2">Left Arm</label>
+                        <div class="col-md-2">
+                            @Html.DropDownListFor(model => model.ExtLeftArms, null, htmlAttributes: new { @class = "form-control form-control-sm" })
+                            @Html.ValidationMessageFor(model => model.ExtLeftArms, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-2">Right Arm</label>
+                        <div class="col-md-2">
+                            @Html.DropDownListFor(model => model.ExtRightArms, null, htmlAttributes: new { @class = "form-control form-control-sm" })
+                            @Html.ValidationMessageFor(model => model.ExtRightArms, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-2">Left Leg</label>
+                        <div class="col-md-2">
+                            @Html.DropDownListFor(model => model.ExtLeftLegs, null, htmlAttributes: new { @class = "form-control form-control-sm" })
+                            @Html.ValidationMessageFor(model => model.ExtLeftLegs, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-2">Right Leg</label>
+                        <div class="col-md-2">
+                            @Html.DropDownListFor(model => model.ExtRightLegs, null, htmlAttributes: new { @class = "form-control form-control-sm" })
+                            @Html.ValidationMessageFor(model => model.ExtRightLegs, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-md-12"> <span class="c"><strong>First Trimester: </strong></span></div>
+                        <label class="col-form-label col-md-2">CRL</label>
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.CRL, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                            @Html.ValidationMessageFor(model => model.CRL, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-2">Estimated EGA</label>
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.CRLEGA, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                            @Html.ValidationMessageFor(model => model.CRLEGA, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-12"> <span class="c"><strong>Second Trimester: </strong></span></div>
+                        <label class="col-form-label col-md-2">Femur Length</label>
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.FemurLength, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                            @Html.ValidationMessageFor(model => model.FemurLength, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-2">Estimated EGA</label>
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.FemurLengthEGA, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                            @Html.ValidationMessageFor(model => model.FemurLengthEGA, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-2">BPD</label>
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.BPD, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                            @Html.ValidationMessageFor(model => model.BPD, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-2">Estimated EGA</label>
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.BPDEGA, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                            @Html.ValidationMessageFor(model => model.BPDEGA, "", new { @class = "text-danger" })
+                        </div>
+
+                        <label class="col-form-label col-md-2">Head Circumference</label>
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.HeadCircumference, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                            @Html.ValidationMessageFor(model => model.HeadCircumference, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-2">Estimated EGA</label>
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.HeadCircumferenceEGA, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                            @Html.ValidationMessageFor(model => model.HeadCircumferenceEGA, "", new { @class = "text-danger" })
+                        </div>
+
+                        <label class="col-form-label col-md-2">Abdominal Circumference</label>
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.AbdCircumference, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                            @Html.ValidationMessageFor(model => model.AbdCircumference, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-2">Estimated EGA</label>
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.AbdEGA, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                            @Html.ValidationMessageFor(model => model.AbdEGA, "", new { @class = "text-danger" })
+                        </div>
+
+                        <label class="col-form-label col-md-2">Estimated Fetal Weight</label>
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.EFetalWeight, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                            @Html.ValidationMessageFor(model => model.EFetalWeight, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6"></div>
+                        <div class="col-md-12"> <span class="c"><strong>Third Trimester: </strong></span></div>
+                        <label class="col-form-label col-md-2">Fermur Length</label>
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.ThirdFermurLength, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                            @Html.ValidationMessageFor(model => model.ThirdFermurLength, "", new { @class = "text-danger" })
+                        </div>
+
+                        <label class="col-form-label col-md-2">BPD</label>
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.ThirdBPD, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                            @Html.ValidationMessageFor(model => model.ThirdBPD, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-2">Estimated GA</label>
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.ThirdEGA, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                            @Html.ValidationMessageFor(model => model.ThirdEGA, "", new { @class = "text-danger" })
+                        </div>
+
+                        <label class="col-form-label col-md-2">Estimated Fetal Weight</label>
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.ThirdEstimatedFetalWeight, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                            @Html.ValidationMessageFor(model => model.ThirdEstimatedFetalWeight, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-form-label col-md-2">Comments</label>
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.Comments, htmlAttributes: new { @class = "form-control form-control-sm" })
+                            @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group mt-1">
+                <div class="offset-10 col-md-2">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                    <a class="btn btn-danger" href="@Url.Action("Index")">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        function begin() {
+            ngo.HTML.Loader.Show();
+        }
+
+        function success(response) {
+
+            if (!response.Error) {
+                ngo.HTML.Alert.Show({ title: response.Message, message: " ", type: "success" }, function () {
+                    window.location = "/PN/Ultrasound/Index";
+                });
+            }
+            else {
+                ngo.HTML.Alert.Show({ title: response.Message, message: " ", type: "error" });
+            }
+            ngo.HTML.Loader.Hide();
+        }
+        function complete() {
+            ngo.HTML.Loader.Hide();
+        }
+    </script>
+}

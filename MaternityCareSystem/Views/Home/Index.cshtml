@@ -1,0 +1,73 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<div class="row">
+    <div class="col-lg-4">
+        <div class="ibox ">
+            <div class="ibox-title">
+                <div class="ibox-tools">
+                   
+                </div>
+                <h5>Appointments</h5>
+            </div>
+            <div class="ibox-content bg-info">
+                <h1 class="no-margins">200</h1>
+              
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="ibox">
+            <div class="ibox-title">
+                <div class="ibox-tools">
+                    @*<span class="label label-info float-right">Annual</span>*@
+                </div>
+                <h5>Patients</h5>
+            </div>
+            <div class="ibox-content bg-primary">
+                <h1 class="no-margins">800</h1>
+                
+              
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="ibox ">
+            <div class="ibox-title">
+                <div class="ibox-tools">
+
+                </div>
+                <h5>visits</h5>
+            </div>
+            <div class="ibox-content bg-success">
+                <h1 class="no-margins">120</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3" hidden>
+        <div class="ibox ">
+            <div class="ibox-title">
+                <div class="ibox-tools">
+                    <span class="label label-danger float-right">Low value</span>
+                </div>
+                <h5>Activity</h5>
+            </div>
+            <div class="ibox-content">
+                <h1 class="no-margins">100</h1>
+                <div class="stat-percent font-bold text-danger">38% <i class="fa fa-level-down"></i></div>
+                <small>In first month</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+
+    $(document).ready(function () {
+
+    });
+    </script>
+}

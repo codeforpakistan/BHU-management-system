@@ -1,0 +1,275 @@
+﻿@model IEnumerable<MaternityCareSystem.Areas.PN.DataModels.PreNatal_PhysicalExamination>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class="ibox-content">
+        <div class="ibox-title"><h5>Pre-Natal Physical Examinations</h5></div>
+        <div class="row">
+            <div class="col-md-4">
+                <a class="btn btn-w-m btn-primary" href="@Url.Action("Create")"><i class="fa fa-plus"></i> Add New</a>
+            </div>
+            <div class="col-md-4 offset-4 float-right">
+                <div class="input-group">
+                    <input type="text" id="txt-input-id" placeholder="Search..." class="form-control">
+                    <span class="input-group-append">
+                        <button type="button" class="btn btn-primary">
+                            <i class="fa fa-search"></i> Search
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <table class="table table-bordered table-responsive mt-1" id="tbl-id">
+            <thead>
+                <tr>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.PatientName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.VisitNo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CurrentEGAWeek)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Weight)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Height)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Temperature)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Pulse)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BP)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.GeneralAppearance)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.HeartMurmur)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.HeartRate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Lungs)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Abdomen)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AbdomenBowelSounds)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FundalHeight)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AppropriateForGestationalAge)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SmallForGestationalAge)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LargeForGestationalAge)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.VagExamNone)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.VagExamMass)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.VagExamTender)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.VagDischargeYellow)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.VagDischargeWhite)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.VagDischargeGreen)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.VagDischargeBleeding)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.VagDischargeNone)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ComplaintPain)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ComplaintBleeding)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ComplaintDischarge)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ComplaintUrineBurning)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ComplaintSeizures)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ComplaintFits)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ComplaintFever)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PreNataVisit1Notes)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PatientName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.VisitNo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CurrentEGAWeek)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Weight)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Height)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Temperature)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Pulse)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BP)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.GeneralAppearance)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HeartMurmur)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HeartRate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Lungs)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Abdomen)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AbdomenBowelSounds)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FundalHeight)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AppropriateForGestationalAge)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SmallForGestationalAge)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LargeForGestationalAge)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.VagExamNone)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.VagExamMass)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.VagExamTender)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.VagDischargeYellow)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.VagDischargeWhite)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.VagDischargeGreen)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.VagDischargeBleeding)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.VagDischargeNone)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ComplaintPain)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ComplaintBleeding)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ComplaintDischarge)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ComplaintUrineBurning)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ComplaintSeizures)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ComplaintFits)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ComplaintFever)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PreNataVisit1Notes)
+                        </td>
+                        <td>
+                            <a class="btn btn-primary btn-sm" href="@Url.Action("Edit", new { id = item.PreNatalPhysicalExamId })">Edit</a>
+                            <a class="btn btn-danger btn-sm text-white" data-examid="@item.PreNatalPhysicalExamId" onclick="deletePhysicalExam(this)">Remove</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section scripts{
+    <script>
+        function deletePhysicalExam(objRef) {
+            var id = $(objRef).data('examid');
+            var tr = $(objRef).parent('td').parent('tr');
+            ngo.HTML.Confirm.Show({ message: "Do you want to delete", title: "warning", type: "warning" }, function () {
+                $.ajax({
+                    url: "/PN/PreNatalPhyExamination/Delete",
+                    contentType: "application/json",
+                    dataType: "Json",
+                    data: "{id:'" + id + "'}",
+                    type: "Post",
+                    success: function (data) {
+                        if (!data.result.Error) {
+                            ngo.HTML.Alert.Show({ message: "Record deleted successfully", title: "success", type: "success" });
+                            $(tr).fadeOut(500);
+                        }
+                    }
+                });
+            });
+        }
+    </script>
+}

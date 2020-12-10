@@ -1,0 +1,205 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
+
+namespace MaternityCareSystem.Areas.PN.DataModels
+{
+    public class Paeds_PhysicalExamination
+    {
+        public int PaedsExamId { get; set; }
+        [Required(ErrorMessage = "Select Patient")]
+        public Nullable<int> PatientId { get; set; }
+        public string PatientName { get; set; }
+        [DisplayFormat(DataFormatString = "{0: dd-MM-yyyy}")]
+        public Nullable<System.DateTime> DOB { get; set; }
+        [Required(ErrorMessage = "Enter Temperature")]
+        public Nullable<decimal> Temperature { get; set; }
+        [Required(ErrorMessage = "Enter BP")]
+        public Nullable<decimal> BP { get; set; }
+        [Required(ErrorMessage = "Enter Pulse")]
+        public Nullable<decimal> Pulse { get; set; }
+        [Required(ErrorMessage ="Enter Weight")]
+        public Nullable<decimal> Weight { get; set; }
+        public string WeightPercentile { get; set; }
+        [Required(ErrorMessage = "Enter Height")]
+        public Nullable<decimal> Height { get; set; }
+        public string HeightPercentile { get; set; }
+        public string HC { get; set; }
+        public string HCPercentile { get; set; }
+        public string Oxygen { get; set; }
+        public string RR { get; set; }
+        public bool Alert { get; set; }
+        public bool ListLess { get; set; }
+        public bool Jaundice { get; set; }
+        public bool Active { get; set; }
+        public bool Agitated { get; set; }
+        public bool Pale { get; set; }
+        public bool Smiling { get; set; }
+        public bool Convulsions { get; set; }
+        public bool Crying { get; set; }
+        public bool NonResponse { get; set; }
+        public bool Lethargic { get; set; }
+        public bool ColorPink { get; set; }
+        public bool Other { get; set; }
+        public string Head { get; set; }
+        public string AntFontAnelle { get; set; }
+        public string PostFontAnelle { get; set; }
+        public string Sutures { get; set; }
+        public bool Cephalohematoma { get; set; }
+        public string HeadOther { get; set; }
+        public string EyePupils { get; set; }
+        public string EyeSclera { get; set; }
+        public string EyeConjuctiva { get; set; }
+        public string EyeDischargeLeft { get; set; }
+        public string EyeDischargeRight { get; set; }
+        public bool EyeRedReflex { get; set; }
+        public string EyeOther { get; set; }
+        public string EarPennaeLeft { get; set; }
+        public string EarPennaeRight { get; set; }
+        public string EarPennaeNotes { get; set; }
+        public string EarCanalLeft { get; set; }
+        public string EarCanalRight { get; set; }
+        public string EarDischarge { get; set; }
+        public string EarOther { get; set; }
+        public string Mouth { get; set; }
+        public string MouthGums { get; set; }
+        public string MouthTeeth { get; set; }
+        public string MouthOther { get; set; }
+        public string Throat { get; set; }
+        public string Tonsils { get; set; }
+        public string ThroatOther { get; set; }
+        public string Nose { get; set; }
+        public string NoseDischarge { get; set; }
+        public string Neck { get; set; }
+        public string SwollenLymphNode { get; set; }
+        public string NeckLeft { get; set; }
+        public string NeckRight { get; set; }
+        public string NeckOther { get; set; }
+        public bool TMLeftNormal { get; set; }
+        public bool TMLeftWhite { get; set; }
+        public bool TMLeftRed { get; set; }
+        public bool TMLeftYellow { get; set; }
+        public bool TMLeftBulging { get; set; }
+        public bool TMLeftMobile { get; set; }
+        public bool TMLeftNonMobile { get; set; }
+        public bool TMLeftRaptured { get; set; }
+        public string TMLeftOther { get; set; }
+        public bool TMRightNormal { get; set; }
+        public bool TMRightWhite { get; set; }
+        public bool TMRightRed { get; set; }
+        public bool TMRightYellow { get; set; }
+        public bool TMRightBulging { get; set; }
+        public bool TMRightMobile { get; set; }
+        public bool TMRightNonMobile { get; set; }
+        public bool TMRightRaptured { get; set; }
+        public string TMDischarge { get; set; }
+        public string TMRightOther { get; set; }
+        public string LungsRespiration { get; set; }
+        public bool LungLeftWheezes { get; set; }
+        public bool LungLeftRhonchi { get; set; }
+        public bool LungLeftRales { get; set; }
+        public bool LungLeftPoorAirEntry { get; set; }
+        public bool LungLeftDiminshed { get; set; }
+        public bool LungRightWheezes { get; set; }
+        public bool LungRightRhonchi { get; set; }
+        public bool LungRightRales { get; set; }
+        public bool LungRightPoorAirEntry { get; set; }
+        public bool LungRightDiminished { get; set; }
+        public string LungOther { get; set; }
+        public bool HeartMurmur { get; set; }
+        public string MurmurRate { get; set; }
+        public string HeartRate { get; set; }
+        public string HeartRythm { get; set; }
+        public string HeartOther { get; set; }
+        public string AbdAbdomen { get; set; }
+        public string AbdTender { get; set; }
+        public string AbdMassQuality { get; set; }
+        public bool AbdRebound { get; set; }
+        public string AbdUmbilicalHernia { get; set; }
+        public string AbdInguinalHernialLeft { get; set; }
+        public string AbdInguinalHernialRight { get; set; }
+        public string UmbClean { get; set; }
+        public string UmdDishcharge { get; set; }
+        public string UmbOther { get; set; }
+        public string GentMale { get; set; }
+        public bool GentHydrocele { get; set; }
+        public bool GentUndescendedLeft { get; set; }
+        public bool GentUndescendedRight { get; set; }
+        public string GentHerniaLeft { get; set; }
+        public string GentHerniaRight { get; set; }
+        public string GentPenis { get; set; }
+        public bool GentMicro { get; set; }
+        public string GentMeatus { get; set; }
+        public string GentDishcharge { get; set; }
+        public string GentMaleOther { get; set; }
+        public string GentFemale { get; set; }
+        public string GentLabia { get; set; }
+        public string GentUrethra { get; set; }
+        public string GentDischarge { get; set; }
+        public string GentMassLeft { get; set; }
+        public string GentMassRight { get; set; }
+        public Nullable<decimal> GentSize { get; set; }
+        public string GentOtherFemale { get; set; }
+        public string MuscArmsLegs { get; set; }
+        public bool MuscLeftWeekness { get; set; }
+        public bool MuscLeftSwelling { get; set; }
+        public bool MuscLeftToneIncDec { get; set; }
+        public bool MuscLeftTender { get; set; }
+        public bool MuscLeftImmobile { get; set; }
+        public bool MuscLeftDecStrength { get; set; }
+        public bool MuscRightWeekness { get; set; }
+        public bool MuscRightSwelling { get; set; }
+        public bool MuscRightToneIncDec { get; set; }
+        public bool MuscRightTender { get; set; }
+        public bool MuscRightImmobile { get; set; }
+        public bool MuscRightDecStrength { get; set; }
+        public bool MuscLaceration { get; set; }
+        public bool MuscBruise { get; set; }
+        public string MuscOther { get; set; }
+        public string FeetHandSymmetry { get; set; }
+        public bool FeetHandLeftWeekness { get; set; }
+        public bool FeetHandLeftSwelling { get; set; }
+        public bool FeetHandLeftTender { get; set; }
+        public bool FeetHandLeftImmobile { get; set; }
+        public bool FeetHandLeftDecStrength { get; set; }
+        public bool FeetHandLeftLaceration { get; set; }
+        public bool FeetHandLeftBruise { get; set; }
+        public bool FeetHandRightWeekness { get; set; }
+        public bool FeetHandRightSwelling { get; set; }
+        public bool FeetHandRightTender { get; set; }
+        public bool FeetHandRightImmobile { get; set; }
+        public bool FeetHandRightDecStrength { get; set; }
+        public bool FeetHandRightLaceration { get; set; }
+        public bool FeetHandRightBruise { get; set; }
+        public bool FeetHandAbleToWalk { get; set; }
+        public string FeetToes { get; set; }
+        public string FeetOther { get; set; }
+        public bool NeuroAwake { get; set; }
+        public bool NeuroAlert { get; set; }
+        public bool NeuroActive { get; set; }
+        public bool NeuroDecConsciousness { get; set; }
+        public bool NeuroAgitated { get; set; }
+        public bool NeuroConvelsions { get; set; }
+        public bool NeuroListLess { get; set; }
+        public bool NeuroLethargic { get; set; }
+        public bool NeuroAQAppropriately { get; set; }
+        public string NeuroReflexLeft { get; set; }
+        public string NeuroReflexRight { get; set; }
+        public string NeuroDevelopment { get; set; }
+        public bool NeuroMotor { get; set; }
+        public bool NeuroLanguage { get; set; }
+        public bool NeuroSocial { get; set; }
+        public string NeuroOther { get; set; }
+        public string Skin { get; set; }
+        public bool RashFlate { get; set; }
+        public bool RashRaised { get; set; }
+        public bool RashErythema { get; set; }
+        public bool RashMacules { get; set; }
+        public bool RashPapules { get; set; }
+        public bool RashPetechiae { get; set; }
+        public Nullable<decimal> RashSize { get; set; }
+        public string RashOther { get; set; }
+    }
+}

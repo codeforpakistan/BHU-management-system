@@ -1,0 +1,92 @@
+﻿@model MaternityCareSystem.Areas.PN.DataModels.PreNatal_Counsel
+@if (Model.RecordExist)
+{
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <lable class="control-label col-md-2">Patient Name</lable>
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.PatientId, null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.PatientId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <lable class="control-label col-md-2">Visit</lable>
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.VisitNo, null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.VisitNo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <lable class="control-label col-md-2">Checkup-Of</lable>
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.CheckupOf, null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CheckupOf, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <div class="col-md-10">
+                    <div class="form-check">
+                        @Html.CheckBoxFor(model => model.DangerSigns, htmlAttributes: new { @class = "form-check-input" })
+                        <label class="form-check-label" for="DangerSigns"><strong>Danger Signs (Return in or before 1 month</strong></label>
+                        @Html.ValidationMessageFor(model => model.DangerSigns, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <div class="form-check">
+                        @Html.CheckBoxFor(model => model.Hgb, htmlAttributes: new { @class = "form-check-input" })
+                        <label class="form-check-label" for="Hgb"><strong>If Hgb <span><</span> 10(Retun in 2 weeks)</strong></label>
+                        @Html.ValidationMessageFor(model => model.Hgb, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <div class="form-check">
+                        @Html.CheckBoxFor(model => model.Protein, htmlAttributes: new { @class = "form-check-input" })
+                        <label class="form-check-label" for="Protein"><strong>if Protein <text>+</text> in Urine (2 weeks for monitor of BP)- Follow Protocols</strong></label>
+                        @Html.ValidationMessageFor(model => model.Protein, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="form-group">
+                <lable class="control-label col-md-2">Next Visit Date</lable>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NextVisitDate, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                    @Html.ValidationMessageFor(model => model.NextVisitDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <lable class="control-label col-md-2">Next Visit Notes</lable>
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.NextVisitNotes, 2, 66, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NextVisitNotes, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="alert alert-danger col-md-12">
+            <h3>  <i class="fa fa-info-circle"></i> No record found </h3>
+        </div>
+    </div>
+}
